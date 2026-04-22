@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
 import '../styles/styles.css';
+import '../scripts/hero.js';
 ---
 
 
@@ -42,6 +43,5 @@ import '../styles/styles.css';
     </div>
 
   </section>
-  <script type="module" src={`${base}src/scripts/hero.js`}></script>
 </BaseLayout>
 
