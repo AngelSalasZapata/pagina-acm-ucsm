@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Inicio">
+
+  <section class="hero hero--centered" id="hero">
+    <div class="hero-grid-overlay"></div>
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+    <!-- Anillos pulsantes -->
+    <div class="hero-ring" style="width:600px;height:600px;left:50%;top:50%;margin-left:-300px;margin-top:-300px;"></div>
+    <div class="hero-ring" style="width:900px;height:900px;left:50%;top:50%;margin-left:-450px;margin-top:-450px;animation-delay:1s;"></div>
+    <div class="hero-ring" style="width:1200px;height:1200px;left:50%;top:50%;margin-left:-600px;margin-top:-600px;animation-delay:2s;"></div>
+    <div class="hero-ring" style="width:1500px;height:1500px;left:50%;top:50%;margin-left:-750px;margin-top:-750px;animation-delay:3s;"></div>
+
+    <div class="hero-content hero-content--center">
+
+      <!-- Terminal animada -->
+      <div class="hero-terminal">
+        <div class="terminal-line" id="tline1">&nbsp;</div>
+        <div class="terminal-line" id="tline2">&nbsp;</div>
+      </div>
+
+      <!-- Logo ACM neon -->
+      <h1 class="hero-acm">ACM</h1>
+      <p class="hero-sub">Association for Computing Machinery</p>
+      <p class="hero-uni">
+        <span class="accent">Student Chapter</span> · Universidad Católica de Santa María
+      </p>
+
+      <!-- Botones que ahora van a páginas separadas -->
+      <div class="hero-ctas hero-ctas--center">
+        <a href="/eventos" class="btn btn-primary">VER EVENTOS →</a>
+        <a href="/nosotros" class="btn btn-ghost">CONOCE MÁS</a>
+      </div>
+
+    </div>
+
+  </section>
+  <script type="module" src="/src/scripts/hero.js"></script>
+</BaseLayout>
+

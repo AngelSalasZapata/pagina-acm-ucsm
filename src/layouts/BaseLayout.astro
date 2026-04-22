@@ -1,0 +1,210 @@
+---
+// src/layouts/BaseLayout.astro
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "ACM Student Chapter",
+  description = "Capítulo estudiantil de la Association for Computing Machinery · Universidad Católica de Santa María"
+} = Astro.props;
+
+const path = Astro.url.pathname;
+
+// Normaliza la ruta eliminando la barra final (excepto en "/")
+const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} · ACM SC</title>
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+    rel="stylesheet"
+  />
+</head>
+	<script type="module" src="/src/scripts/hero.js"></script>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <a href="/" class="nav-logo" aria-label="ACM Student Chapter - Inicio">
+        <span class="logo-bracket">[</span>ACM<span class="logo-accent">_SC</span><span class="logo-bracket">]</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks" role="list">
+        <li>
+          <a
+            href="/nosotros"
+            class:list={[{ active: currentPath === "/nosotros" }]}
+          >Nosotros</a>
+        </li>
+        <li>
+          <a
+            href="/informacion"
+            class:list={[{ active: currentPath === "/informacion" }]}
+          >Info</a>
+        </li>
+        <li>
+          <a
+            href="/eventos"
+            class:list={[{ active: currentPath === "/eventos" }]}
+          >Eventos</a>
+        </li>
+        <li>
+          <a
+            href="/galeria"
+            class:list={[{ active: currentPath === "/galeria" }]}
+          >Galería</a>
+        </li>
+        <li>
+          <a
+            href="/unete"
+            class:list={[{ active: currentPath === "/unete" }, "nav-cta"]}
+          >Únete</a>
+        </li>
+      </ul>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       CONTENIDO DE LA PÁGINA
+  ═══════════════════════════════════════ -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-bracket">[</span>ACM<span class="logo-accent">_SC</span><span class="logo-bracket">]</span>
+          </div>
+          <p>ACM Student Chapter · Universidad Católica de Santa María<br/>Todos los derechos reservados © 2026</p>
+        </div>
+
+
+        <div class="footer-credit">
+          <span>Hecho con <span class="accent">♥</span> por estudiantes, para estudiantes</span>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS GLOBALES (navbar scroll + hamburger)
+  ═══════════════════════════════════════ -->
+  <script>
+    // ── Navbar scroll ─────────────────────────
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+      }, { passive: true });
+    }
+
+    // ── Hamburger menu ────────────────────────
+    const hamburger = document.getElementById('hamburger') as HTMLButtonElement | null;
+    const navLinks  = document.getElementById('navLinks');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+
+        const spans = hamburger.querySelectorAll('span');
+        if (isOpen) {
+          (spans[0] as HTMLElement).style.transform = 'rotate(45deg) translate(5px, 5px)';
+          (spans[1] as HTMLElement).style.opacity   = '0';
+          (spans[2] as HTMLElement).style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+          spans.forEach(s => {
+            (s as HTMLElement).style.transform = '';
+            (s as HTMLElement).style.opacity   = '';
+          });
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.querySelectorAll('span').forEach(s => {
+            (s as HTMLElement).style.transform = '';
+            (s as HTMLElement).style.opacity   = '';
+          });
+        });
+      });
+    }
+  </script>
+
+  	<script type="module" src="/src/scripts/hero.js"></script>
+
+</body>
+</html>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ESTILOS ADICIONALES: link activo en navbar
+     (Se combinan con tu styles.css global)
+═══════════════════════════════════════════════════════════ -->
+<style>
+  /* Resalta el link de la página actual */
+  .nav-links a.active {
+    color: var(--green) !important;
+  }
+
+  /* Pequeño indicador debajo del link activo */
+  .nav-links a.active:not(.nav-cta) {
+    position: relative;
+  }
+
+  .nav-links a.active:not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--green);
+  }
+
+  /* nav-cta activo tiene fondo sólido */
+  .nav-links a.nav-cta.active {
+    background: var(--green) !important;
+    color: var(--bg) !important;
+  }
+
+  /* Asegura que main ocupe espacio mínimo para el footer quede abajo */
+  main {
+    min-height: calc(100vh - 70px);
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+// src/pages/galeria.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Galería">
+
+  <!-- GALLERY -->
+  <section class="gallery section" id="gallery">
+    <div class="container">
+      <div class="section-label">// 04. GALERÍA</div>
+      <h2 class="section-title">Momentos <span class="accent">memorables</span></h2>
+      <div class="gallery-grid">
+        <div class="gitem gitem--large">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Evento ACM" loading="lazy"/>
+          <div class="gitem-overlay"><span>HackACM 2024</span></div>
+        </div>
+        <div class="gitem">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80" alt="Taller" loading="lazy"/>
+          <div class="gitem-overlay"><span>Taller de Python</span></div>
+        </div>
+        <div class="gitem">
+          <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&q=80" alt="Charla" loading="lazy"/>
+          <div class="gitem-overlay"><span>Tech Talk 2024</span></div>
+        </div>
+        <div class="gitem">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" alt="Equipo" loading="lazy"/>
+          <div class="gitem-overlay"><span>Nuestro Equipo</span></div>
+        </div>
+        <div class="gitem">
+          <img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?w=600&q=80" alt="Networking" loading="lazy"/>
+          <div class="gitem-overlay"><span>ACM Connect</span></div>
+        </div>
+        <div class="gitem gitem--wide">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80" alt="Presentación" loading="lazy"/>
+          <div class="gitem-overlay"><span>Demo Day 2024</span></div>
+        </div>
+      </div>
+
+      <!-- LIGHTBOX -->
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lbClose">✕</button>
+        <button class="lightbox-nav lb-prev" id="lbPrev">‹</button>
+        <img src="" alt="" id="lbImg" />
+        <div class="lb-caption" id="lbCaption"></div>
+        <button class="lightbox-nav lb-next" id="lbNext">›</button>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="/scripts/galeria.js"></script>
+
+</BaseLayout>

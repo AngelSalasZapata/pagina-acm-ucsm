@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Únete">
+
+  <!-- CONTACT / JOIN -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-label">// 05. ÚNETE</div>
+      <div class="contact-inner">
+        <div class="contact-text">
+          <h2 class="section-title">¿Listo para <span class="accent">unirte</span>?</h2>
+          <p>La membresía está abierta a todos los estudiantes de la universidad. No importa tu nivel: si te apasiona la tecnología, este es tu lugar.</p>
+          <ul class="contact-perks">
+            <li>✓ Acceso a todos los eventos y talleres</li>
+            <li>✓ Membresía digital ACM</li>
+            <li>✓ Red de contactos nacional</li>
+            <li>✓ Proyectos colaborativos</li>
+          </ul>
+          <div class="social-links">
+            <a href="#" class="social-link">GitHub</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">Discord</a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Correo universitario</label>
+            <input type="email" placeholder="nombre@universidad.edu" required />
+          </div>
+          <div class="form-group">
+            <label>Carrera</label>
+            <input type="text" placeholder="Ingeniería en Sistemas..." />
+          </div>
+          <div class="form-group">
+            <label>¿Por qué quieres unirte?</label>
+            <textarea placeholder="Cuéntanos tu motivación..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Enviar solicitud →</button>
+          <div class="form-success" id="formSuccess">¡Solicitud enviada! Te contactaremos pronto. 🚀</div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="/scripts/unete.js"></script>
+</BaseLayout>
