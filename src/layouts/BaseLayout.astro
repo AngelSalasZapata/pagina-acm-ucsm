@@ -43,38 +43,38 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
 
-      <a href={base} class="nav-logo" aria-label="ACM Student Chapter - Inicio">
+      <a href={`${base}/`} class="nav-logo" aria-label="ACM Student Chapter - Inicio">
         <span class="logo-bracket">[</span>ACM<span class="logo-accent">_SC</span><span class="logo-bracket">]</span>
       </a>
 
       <ul class="nav-links" id="navLinks" role="list">
         <li>
           <a
-            href={`${base}nosotros`}
+            href={`${base}/nosotros`}
             class:list={[{ active: currentPath === "/nosotros" }]}
           >Nosotros</a>
         </li>
         <li>
           <a
-            href={`${base}informacion`}
+            href={`${base}/informacion`}
             class:list={[{ active: currentPath === "/informacion" }]}
           >Info</a>
         </li>
         <li>
           <a
-            href={`${base}eventos`}
+            href={`${base}/eventos`}
             class:list={[{ active: currentPath === "/eventos" }]}
           >Eventos</a>
         </li>
         <li>
           <a
-            href={`${base}galeria`}
+            href={`${base}/galeria`}
             class:list={[{ active: currentPath === "/galeria" }]}
           >Galería</a>
         </li>
         <li>
           <a
-            href={`${base}unete`}
+            href={`${base}/unete`}
             class:list={[{ active: currentPath === "/unete" }, "nav-cta"]}
           >Únete</a>
         </li>
