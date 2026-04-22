@@ -11,6 +11,7 @@ const {
 } = Astro.props;
 
 const path = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 
 // Normaliza la ruta eliminando la barra final (excepto en "/")
 const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
@@ -24,7 +25,7 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
   <meta name="description" content={description} />
   <title>{title} · ACM SC</title>
 
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href={`${base}styles.css`} />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +35,6 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
     rel="stylesheet"
   />
 </head>
-	<script type="module" src="/src/scripts/hero.js"></script>
 <body>
 
   <!-- ═══════════════════════════════════════
@@ -43,38 +43,38 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
 
-      <a href="/" class="nav-logo" aria-label="ACM Student Chapter - Inicio">
+      <a href={base} class="nav-logo" aria-label="ACM Student Chapter - Inicio">
         <span class="logo-bracket">[</span>ACM<span class="logo-accent">_SC</span><span class="logo-bracket">]</span>
       </a>
 
       <ul class="nav-links" id="navLinks" role="list">
         <li>
           <a
-            href="/nosotros"
+            href={`${base}nosotros`}
             class:list={[{ active: currentPath === "/nosotros" }]}
           >Nosotros</a>
         </li>
         <li>
           <a
-            href="/informacion"
+            href={`${base}informacion`}
             class:list={[{ active: currentPath === "/informacion" }]}
           >Info</a>
         </li>
         <li>
           <a
-            href="/eventos"
+            href={`${base}eventos`}
             class:list={[{ active: currentPath === "/eventos" }]}
           >Eventos</a>
         </li>
         <li>
           <a
-            href="/galeria"
+            href={`${base}galeria`}
             class:list={[{ active: currentPath === "/galeria" }]}
           >Galería</a>
         </li>
         <li>
           <a
-            href="/unete"
+            href={`${base}unete`}
             class:list={[{ active: currentPath === "/unete" }, "nav-cta"]}
           >Únete</a>
         </li>
@@ -167,7 +167,7 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
     }
   </script>
 
-  	<script type="module" src="/src/scripts/hero.js"></script>
+  	<script type="module" src={`${base}src/scripts/hero.js`}></script>
 
 </body>
 </html>
