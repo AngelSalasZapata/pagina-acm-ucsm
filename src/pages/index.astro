@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
-import '../styles/styles.css';
-import '../scripts/hero.js';
 ---
 
 <BaseLayout title="Inicio">
@@ -34,12 +32,11 @@ import '../scripts/hero.js';
 
       <!-- Botones que ahora van a páginas separadas -->
       <div class="hero-ctas hero-ctas--center">
-        <a href={`${base}/eventos`} class="btn btn-primary">VER EVENTOS →</a>
-        <a href={`${base}/nosotros`} class="btn btn-ghost">CONOCE MÁS</a>
+        <a href={base + "/eventos"} class="btn btn-primary">VER EVENTOS →</a>
+        <a href={base + "/nosotros"} class="btn btn-ghost">CONOCE MÁS</a>
       </div>
 
     </div>
 
   </section>
 </BaseLayout>
-
