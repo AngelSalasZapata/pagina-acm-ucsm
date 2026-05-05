@@ -1,5 +1,6 @@
+import os
 
-const revealEls = document.querySelectorAll('.reveal');
+content = """const revealEls = document.querySelectorAll('.reveal');
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, index) => {
@@ -30,3 +31,8 @@ document.querySelectorAll('.event-tag').forEach(tag => {
     tag.style.color = color === '#00e676' ? '#080d08' : '#080d08';
   }
 });
+"""
+
+with open(r'C:\Users\afabi\Desktop\acmastro\ucsm-acm\src\scripts\eventos.js', 'w', encoding='utf-8', newline='\n') as f:
+    f.write(content)
+print('Done')

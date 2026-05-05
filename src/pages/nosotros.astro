@@ -1,6 +1,7 @@
 ---
 // src/pages/nosotros.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Nosotros">
 
@@ -44,5 +45,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
-  <script type="module" src="/src/scripts/nosotros.js"></script>
+  <script type="module" src={base + "/src/scripts/nosotros.js"}></script>
 </BaseLayout>

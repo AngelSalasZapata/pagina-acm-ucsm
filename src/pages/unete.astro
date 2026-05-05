@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Únete">
 
@@ -47,5 +48,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
-  <script type="module" src="/scripts/unete.js"></script>
+  <script type="module" src={base + "/scripts/unete.js"}></script>
 </BaseLayout>

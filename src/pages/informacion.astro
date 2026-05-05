@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Información">
 
@@ -42,5 +43,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
-  <script type="module" src="/src/scripts/informacion.js"></script>
+  <script type="module" src={base + "/src/scripts/informacion.js"}></script>
 </BaseLayout>
