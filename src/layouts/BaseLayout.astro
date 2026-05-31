@@ -65,12 +65,18 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
             class:list={[{ active: currentPath === "/informacion" }]}
           >Info</a>
         </li>
-        <li>
-          <a
-            href={`${base}/eventos`}
-            class:list={[{ active: currentPath === "/eventos" }]}
-          >Eventos</a>
-        </li>
+<li>
+    <a
+      href={`${base}/eventos`}
+      class:list={[{ active: currentPath === "/eventos" }]}
+    >Eventos</a>
+  </li>
+  <li>
+    <a
+      href={`${base}/profesional`}
+      class:list={[{ active: currentPath === "/profesional" }]}
+    >Profesional</a>
+  </li>
         <li>
           <a
             href={`${base}/galeria`}
@@ -118,8 +124,11 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
 
 
         <div class="footer-credit">
-          <span>Hecho con <span class="accent">♥</span> por estudiantes, para estudiantes</span>
-        </div>
+    <div class="footer-links">
+      <a href={`${base}/profesional`}>Profesional</a>
+    </div>
+    <span>Hecho con <span class="accent">♥</span> por estudiantes, para estudiantes</span>
+  </div>
 
       </div>
     </div>
