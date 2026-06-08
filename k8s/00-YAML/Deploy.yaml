@@ -1,0 +1,216 @@
+# ==============================================================================
+# INFRAESTRUCTURA KUBERNETES - CAPÍTULO ESTUDIANTIL ACM UCSM
+# Namespace: 2023241041
+# Componentes: Base de Datos (PostgreSQL), Backend (FastAPI), Frontend
+# ==============================================================================
+
+# ==========================================
+# COMPONENTE 1: BASE DE DATOS (Fija: 1 Réplica)
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ucsm-acm-db-deploy
+  namespace: "2023241041"
+  labels:
+    app.kubernetes.io/part-of: ucsm-acm
+spec:
+  replicas: 1 # Las bases de datos transaccionales NO deben autoescalarse horizontalmente con HPA clásico
+  selector:
+    matchLabels:
+      component: db
+  template:
+    metadata:
+      labels:
+        component: db
+    spec:
+      containers:
+      - name: postgres-db
+        image: postgres:17-alpine
+        env:
+        - name: POSTGRES_DB
+          value: ucsm_acm
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: ucsm-acm-secret-env
+              key: postgres-user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ucsm-acm-secret-env
+              key: postgres-password
+        ports:
+        - containerPort: 5432
+          name: dbport
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+  namespace: "2023241041"
+spec:
+  selector:
+    component: db # Vincula este servicio directamente al contenedor de PostgreSQL
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+
+---
+# ==========================================
+# COMPONENTE 2: BACKEND FASTAPI (Autoescalable)
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ucsm-acm-backend-deploy
+  namespace: "2023241041"
+  labels:
+    app.kubernetes.io/part-of: ucsm-acm
+spec:
+  # OMITIDO 'replicas': El control del número de pods lo toma el HorizontalPodAutoscaler (HPA)
+  selector:
+    matchLabels:
+      component: backend
+  template:
+    metadata:
+      labels:
+        component: backend
+    spec:
+      containers:
+      - name: fastapi-backend
+        image: ghcr.io/tu-usuario/mi-backend:latest
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: ucsm-acm-secret-env
+              key: database-url
+        ports:
+        - containerPort: 8000
+          name: backport
+        resources:
+          # REQUISITO OBLIGATORIO: El HPA calcula el porcentaje basándose en los 'requests' de CPU
+          requests:
+            cpu: "100m"     # Reserva garantizada de 0.1 núcleos de CPU
+            memory: "128Mi"
+          limits:
+            cpu: "500m"     # Techo máximo permitido antes de aplicar throttling
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: "2023241041"
+spec:
+  selector:
+    component: backend
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+
+---
+# ==========================================
+# COMPONENTE 3: AUTOESCALADO DEL BACKEND (HPA)
+# ==========================================
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ucsm-acm-backend-hpa
+  namespace: "2023241041"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ucsm-acm-backend-deploy # Monitorea el despliegue del backend
+  minReplicas: 1  # Cantidad mínima de Pods en horas muertas de tráfico
+  maxReplicas: 5  # Cantidad máxima de Pods para proteger los recursos del nodo/clúster
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70 # REGLA: Si el uso de CPU promedio supera el 70% de lo solicitado, genera un nuevo Pod
+
+---
+# ==========================================
+# COMPONENTE 4: FRONTEND WEB (Autoescalable)
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ucsm-acm-frontend-deploy
+  namespace: "2023241041"
+  labels:
+    app.kubernetes.io/part-of: ucsm-acm
+spec:
+  selector:
+    matchLabels:
+      component: frontend
+  template:
+    metadata:
+      labels:
+        component: frontend
+    spec:
+      containers:
+      - name: nginx-frontend
+        image: ghcr.io/tu-usuario/mi-frontend:latest
+        ports:
+        - containerPort: 80
+          name: frontport
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+          limits:
+            cpu: "300m"
+            memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: "2023241041"
+spec:
+  type: LoadBalancer # Cambiar a ClusterIP si vas a mapear un componente Ingress Controller externo
+  selector:
+    component: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+# ==========================================
+# COMPONENTE 5: AUTOESCALADO DEL FRONTEND (HPA)
+# ==========================================
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ucsm-acm-frontend-hpa
+  namespace: "2023241041"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ucsm-acm-frontend-deploy # Monitorea el despliegue del frontend
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75 # Escala de forma aislada si las peticiones de vistas estáticas aumentan

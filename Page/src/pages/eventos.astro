@@ -1,0 +1,124 @@
+---
+// src/pages/eventos.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Eventos">
+    
+  <!-- EVENTS -->
+  <section class="events section" id="events">
+    <div class="container">
+      <div class="section-label">// 03. CALENDARIO DE EVENTOS</div>
+      <h2 class="section-title">Próximas <span class="accent">actividades</span></h2>
+      <div class="events-timeline">
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">12</span>
+            <span class="event-month">ABR 2025</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" alt="Hackathon" loading="lazy"/>
+            <div class="event-tag">Hackathon</div>
+          </div>
+          <div class="event-body">
+            <h3>HackACM 2025</h3>
+            <p>Nuestro hackathon anual de 24 horas. Equipos de hasta 4 personas compitiendo por premios en categorías de IA, sostenibilidad y salud digital.</p>
+            <div class="event-meta">
+              <span>📍 Auditorio Principal</span>
+              <span>⏱ 24h</span>
+              <span>👥 Equipos de 4</span>
+            </div>
+            <a href="#contact" class="event-btn">Registrarse</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">24</span>
+            <span class="event-month">ABR 2025</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="Taller" loading="lazy"/>
+            <div class="event-tag">Taller</div>
+          </div>
+          <div class="event-body">
+            <h3>Introducción a Machine Learning</h3>
+            <p>Aprende los fundamentos de ML con Python y scikit-learn. Taller práctico con datasets reales y casos de uso de la industria.</p>
+            <div class="event-meta">
+              <span>📍 Lab de Cómputo 3</span>
+              <span>⏱ 3h</span>
+              <span>👥 30 cupos</span>
+            </div>
+            <a href="#contact" class="event-btn">Registrarse</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">08</span>
+            <span class="event-month">MAY 2025</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558346547-4439467bd1d5?w=600&q=80" alt="Charla" loading="lazy"/>
+            <div class="event-tag">Keynote</div>
+          </div>
+          <div class="event-body">
+            <h3>Tech Talk: Ciberseguridad en 2025</h3>
+            <p>Especialista en seguridad informática de una firma multinacional comparte las tendencias, amenazas y oportunidades del sector.</p>
+            <div class="event-meta">
+              <span>📍 Sala de Conferencias B</span>
+              <span>⏱ 2h</span>
+              <span>👥 Abierto</span>
+            </div>
+            <a href="#contact" class="event-btn">Ver detalles</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">20</span>
+            <span class="event-month">MAY 2025</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" alt="Workshop" loading="lazy"/>
+            <div class="event-tag">Workshop</div>
+          </div>
+          <div class="event-body">
+            <h3>Desarrollo Web Full Stack</h3>
+            <p>Workshop intensivo de React + Node.js + bases de datos. Construirás una aplicación completa desde cero con guía de mentores.</p>
+            <div class="event-meta">
+              <span>📍 Lab de Innovación</span>
+              <span>⏱ 6h</span>
+              <span>👥 20 cupos</span>
+            </div>
+            <a href="#contact" class="event-btn">Registrarse</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">05</span>
+            <span class="event-month">JUN 2025</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" alt="Networking" loading="lazy"/>
+            <div class="event-tag">Networking</div>
+          </div>
+          <div class="event-body">
+            <h3>ACM Connect: Empresas &amp; Estudiantes</h3>
+            <p>Feria de conexiones profesionales con representantes de empresas tech. Trae tu CV y prepárate para presentarte en 60 segundos.</p>
+            <div class="event-meta">
+              <span>📍 Hall Universitario</span>
+              <span>⏱ 4h</span>
+              <span>👥 Abierto</span>
+            </div>
+            <a href="#contact" class="event-btn">Ver detalles</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <script type="module" src="/src/scripts/eventos.js"></script>
+
+</BaseLayout>

@@ -1,0 +1,12 @@
+CREATE TABLE "S03EVENTS"(
+	nIdEvent UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+	cName VARCHAR(50) NOT NULL,
+	cDescription TEXT,
+
+
+	tStartDate TIMESTAMP NOT NULL,
+	tEndDate TIMESTAMP,
+
+	tCreatedAt TIMESTAMP DEFAULT NOW(),
+	bIsActive BOOL DEFAULT TRUE
+);
