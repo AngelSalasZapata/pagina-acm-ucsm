@@ -1,6 +1,7 @@
 ---
 // src/pages/nosotros.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Nosotros">
 
@@ -13,7 +14,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h2 class="section-title">Impulsando el futuro <span class="accent">tecnológico</span> del Perú</h2>
           <p>Somos el capítulo estudiantil de la <strong>Association for Computing Machinery (ACM)</strong> de la Universidad Católica de Santa María, una comunidad de estudiantes apasionados por la ingeniería, ciencias, el desarrollo de software y la innovación tecnológica.</p>
           <p>Fundado para conectar a estudiantes con recursos académicos de clase mundial, organizamos talleres, hackathons, charlas con la industria y proyectos colaborativos que potencian las habilidades técnicas y profesionales de nuestros miembros.</p>
-          <p>Formamos parte de la red global ACM con presencia en más de 100 países, brindando a nuestros miembros acceso a publicaciones científicas, eventos internacionales y una comunidad diversa de profesionales.</p>
           <div class="about-badges">
             <span class="badge">Programación</span>
             <span class="badge">IA &amp; ML</span>
@@ -45,5 +45,300 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
   </section>
-  <script type="module" src="/src/scripts/nosotros.js"></script>
+
+  <!-- ── SCROLL REVEAL SECTION ── -->
+  <section class="scroll-reveal" id="scroll-reveal">
+    <div class="separator-bar" id="separator-bar"></div>
+
+    <div class="reveal-stage" id="reveal-stage">
+      <div class="reveal-purple" id="reveal-purple">
+        <div class="content-inner">
+          <h2 class="section-title">Team</h2>
+          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+        </div>
+      </div>
+
+      <div class="reveal-green" id="reveal-green">
+        <div class="content-inner">
+          <h2 class="section-title">Christian</h2>
+          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+        </div>
+      </div>
+
+      <div class="reveal-blue" id="reveal-blue">
+        <div class="content-inner">
+          <h2 class="section-title">Fernando</h2>
+          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+        </div>
+      </div>
+
+      <div class="reveal-red" id="reveal-red">
+        <div class="content-inner">
+          <h2 class="section-title">Santiago</h2>
+          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+        </div>
+      </div>
+
+      <div class="reveal-content" id="reveal-white">
+        <div class="content-inner">
+          <h2 class="section-title">Andry</h2>
+          <p>Descubre hacia dónde nos dirigimos. Nuevos proyectos, nuevas metas y un camino lleno de innovación tecnológica.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script type="module" src={base + "src/scripts/nosotros.js"}></script>
 </BaseLayout>
+
+<style>
+  .scroll-reveal {
+    position: relative;
+    background: rgba(13, 20, 13, 0.65);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    min-height: 3000vh;
+  }
+
+  .separator-bar {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--green);
+    letter-spacing: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    user-select: none;
+  }
+
+  .reveal-stage {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .reveal-purple {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background: #660099;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .reveal-purple .section-title { color: #fff; }
+  .reveal-purple .accent5 { color: #ffcc00; }
+  .reveal-purple p { color: #ecc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
+
+  .reveal-green {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background: #006600;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .reveal-green .section-title { color: #fff; }
+  .reveal-green .accent4 { color: #ffcc00; }
+  .reveal-green p { color: #cfc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
+
+  .reveal-blue {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    background: #0033cc;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .reveal-blue .section-title { color: #fff; }
+  .reveal-blue .accent3 { color: #ffcc00; }
+  .reveal-blue p { color: #ccf; font-size: 16px; line-height: 1.8; margin-top: 20px; }
+
+  .reveal-red {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    background: #cc0000;
+    opacity: 0;
+    will-change: opacity, clip-path;
+  }
+
+  .reveal-red .section-title { color: #fff; }
+  .reveal-red .accent2 { color: #ffcc00; }
+  .reveal-red p { color: #fcc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
+
+  .reveal-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    background: #fff;
+    will-change: clip-path;
+  }
+
+  .content-inner {
+    max-width: 720px;
+    padding: 40px 24px;
+    text-align: center;
+    color: #111;
+  }
+
+  .content-inner .section-title {
+    color: #111;
+  }
+
+  .content-inner .accent {
+    color: var(--green);
+  }
+
+  .content-inner p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-top: 20px;
+  }
+
+</style>
+
+<script>
+  function generateSeparator() {
+    const bar = document.getElementById('separator-bar');
+    if (!bar) return;
+    const char = '+\\\\+';
+    const containerWidth = bar.parentElement.clientWidth;
+    const charWidth = 40;
+    const repeatCount = Math.ceil(containerWidth / charWidth) + 2;
+    bar.textContent = new Array(repeatCount).fill(char).join('');
+  }
+
+  function initReveal() {
+    const whiteEl = document.getElementById('reveal-white');
+    const redEl = document.getElementById('reveal-red');
+    const blueEl = document.getElementById('reveal-blue');
+    const greenEl = document.getElementById('reveal-green');
+    const purpleEl = document.getElementById('reveal-purple');
+    const section = document.getElementById('scroll-reveal');
+    if (!whiteEl || !redEl || !blueEl || !greenEl || !purpleEl || !section) return;
+
+    const STEPS = 7;
+    const stairWidth = 8;
+    const maxOffset = (STEPS - 1) * stairWidth;
+    const total = 100 + maxOffset;
+
+    const off1 = [];
+    for (let i = 0; i < STEPS; i++) off1.push(i * stairWidth);
+    for (let i = STEPS - 1; i >= 0; i--) off1.push(i * stairWidth);
+
+    const off2 = [];
+    for (let i = STEPS - 1; i >= 0; i--) off2.push(i * stairWidth);
+    for (let i = 0; i < STEPS; i++) off2.push(i * stairWidth);
+
+    const totalSteps = off1.length;
+    const stepH = 100 / totalSteps;
+
+    function poly1(p) {
+      const sp = p * p * (3 - 2 * p);
+      const pts = ['0% 0%'];
+      for (let i = 0; i < totalSteps; i++) {
+        const rx = Math.max(0, Math.min(100, sp * total - maxOffset + off1[i]));
+        pts.push(`${rx}% ${i * stepH}%`, `${rx}% ${(i + 1) * stepH}%`);
+      }
+      pts.push('0% 100%');
+      return `polygon(${pts.join(',')})`;
+    }
+
+    function polyStr(p, o) {
+      const sp = p * p * (3 - 2 * p);
+      const pts = ['0% 0%'];
+      for (let i = 0; i < totalSteps; i++) {
+        const rx = Math.max(0, Math.min(100, (1 - sp) * 100 - sp * maxOffset + o[i]));
+        pts.push(`${rx}% ${i * stepH}%`, `${rx}% ${(i + 1) * stepH}%`);
+      }
+      pts.push('0% 100%');
+      return `polygon(${pts.join(',')})`;
+    }
+
+    const sp = x => x * x * (3 - 2 * x);
+    let ticking = false;
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const wh = window.innerHeight;
+        const totalScroll = rect.height + wh;
+        const scrolled = wh - rect.top;
+        const pt = Math.max(0, Math.min(1, scrolled / totalScroll));
+
+        const split = 0.19;
+        const p1 = Math.min(pt / split, 1);
+        const p2 = pt > split ? Math.min((pt - split) / split, 1) : 0;
+        const p3 = pt > split * 2 ? Math.min((pt - split * 2) / split, 1) : 0;
+        const p4 = pt > split * 3 ? Math.min((pt - split * 3) / split, 1) : 0;
+        const p5 = pt > split * 4 ? Math.min((pt - split * 4) / split, 1) : 0;
+
+        whiteEl.style.clipPath = p2 > 0 ? polyStr(p2, off2) : (pt > 0 ? poly1(p1) : poly1(0));
+
+        if (p2 > 0) {
+          redEl.style.opacity = sp(p2);
+        } else {
+          redEl.style.clipPath = 'none';
+        }
+
+        if (p3 > 0) {
+          redEl.style.clipPath = polyStr(p3, off2);
+          blueEl.style.opacity = sp(p3);
+        } else {
+          blueEl.style.clipPath = 'none';
+        }
+
+        if (p4 > 0) {
+          blueEl.style.clipPath = polyStr(p4, off2);
+          greenEl.style.opacity = sp(p4);
+        } else {
+          greenEl.style.clipPath = 'none';
+        }
+
+        if (p5 > 0) {
+          greenEl.style.clipPath = polyStr(p5, off2);
+          purpleEl.style.opacity = sp(p5);
+        }
+
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    generateSeparator();
+    initReveal();
+  });
+
+  window.addEventListener('resize', generateSeparator);
+</script>
