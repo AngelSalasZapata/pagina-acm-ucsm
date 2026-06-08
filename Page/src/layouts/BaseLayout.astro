@@ -138,6 +138,55 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
 </footer>
 
   <script>
+    // Custom scrollbar overlay
+    (function() {
+      var sb = document.createElement('div');
+      sb.className = 'custom-scrollbar';
+      var tr = document.createElement('div');
+      tr.className = 'custom-scrollbar-track';
+      var th = document.createElement('div');
+      th.className = 'custom-scrollbar-thumb';
+      sb.appendChild(tr);
+      sb.appendChild(th);
+      document.body.appendChild(sb);
+
+      function update() {
+        var sh = document.documentElement.scrollHeight;
+        var vh = window.innerHeight;
+        var st = window.scrollY;
+        var maxS = sh - vh;
+        var prog = maxS > 0 ? st / maxS : 0;
+        var sth = sb.offsetHeight;
+        var thh = 26;
+        th.style.top = (prog * (sth - thh)) + 'px';
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+
+      var drag = false, dy = 0, dt = 0;
+      th.addEventListener('mousedown', function(e) {
+        drag = true;
+        dy = e.clientY;
+        dt = th.getBoundingClientRect().top;
+        document.body.style.userSelect = 'none';
+      });
+      document.addEventListener('mousemove', function(e) {
+        if (!drag) return;
+        var sh = document.documentElement.scrollHeight;
+        var vh = window.innerHeight;
+        var maxS = sh - vh;
+        var tp = (dt + (e.clientY - dy)) / sb.offsetHeight;
+        window.scrollTo(0, Math.max(0, Math.min(1, tp)) * maxS);
+      });
+      document.addEventListener('mouseup', function() {
+        if (drag) { drag = false; document.body.style.userSelect = ''; }
+      });
+    })();
+  </script>
+
+  <script>
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
     if (navbar) {
@@ -269,7 +318,7 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
      (Se combinan con tu styles.css global)
 ═══════════════════════════════════════════════════════════ -->
 <style>
-  /* Resalta el link de la página actual */
+  /* ─── Navbar active link ─── */
   .nav-links a.active {
     color: var(--green) !important;
   }
