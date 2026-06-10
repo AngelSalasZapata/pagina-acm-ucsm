@@ -60,10 +60,6 @@
         gltf.scene.traverse(o => { if (o.isMesh) { if (o.material) o.material.dispose(); o.material = mat; } });
       }
       group.add(gltf.scene);
-      if (gltf.animations && gltf.animations.length) {
-        mixer = new THREE.AnimationMixer(gltf.scene);
-        const clip = gltf.animations[0];
-        const startTime = isSkull ? (clip.duration ? clip.duration * 0.5 : 0) : isHeart ? clip.duration * 0.56 : 0;
       console.log('[AsciiViewer] animations:', gltf.animations?.length, isSkull, isHeart);
       if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(gltf.scene);
