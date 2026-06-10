@@ -63,7 +63,7 @@
       if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(gltf.scene);
         const clip = gltf.animations[0];
-        const startTime = isSkull || isHeart ? clip.duration * 0.56 : 0;
+        const startTime = isSkull ? clip.duration * 0.5 : isHeart ? clip.duration * 0.56 : 0;
         action = mixer.clipAction(clip);
         action.setLoop(isHeart ? THREE.LoopRepeat : THREE.LoopOnce);
         action.clampWhenFinished = !isHeart;
