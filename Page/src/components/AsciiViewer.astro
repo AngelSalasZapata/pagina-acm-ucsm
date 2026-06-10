@@ -62,8 +62,24 @@
       group.add(gltf.scene);
       if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(gltf.scene);
-        const clip = gltf.animations[0];
-        const startTime = isSkull ? (clip.duration ? clip.duration * 0.5 : 0) : isHeart ? clip.duration * 0.56 : 0;
+        let clip = gltf.animations[0];
+        if (isSkull && clip.duration) {
+          const half = clip.duration * 0.5;
+          const newTracks = clip.tracks.map(t => {
+            const idx = [];
+            for (let i = 0; i < t.times.length; i++) { if (t.times[i] >= half) idx.push(i); }
+            const vpk = t.values.length / t.times.length;
+            const times = new Float32Array(idx.length);
+            const values = new Float32Array(idx.length * vpk);
+            for (let j = 0; j < idx.length; j++) {
+              times[j] = t.times[idx[j]] - half;
+              for (let k = 0; k < vpk; k++) values[j * vpk + k] = t.values[idx[j] * vpk + k];
+            }
+            return new t.constructor(t.name, times, values);
+          });
+          clip = new THREE.AnimationClip('skull_half', clip.duration - half, newTracks);
+        }
+        const startTime = !isSkull && isHeart ? clip.duration * 0.56 : 0;
         action = mixer.clipAction(clip);
         action.setLoop(isHeart ? THREE.LoopRepeat : THREE.LoopOnce);
         action.clampWhenFinished = !isHeart;
