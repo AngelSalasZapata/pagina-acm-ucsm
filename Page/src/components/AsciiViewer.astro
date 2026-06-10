@@ -4,274 +4,115 @@
   import * as THREE from 'three';
   import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-  if (window.innerWidth >= 640) init();
+  if (window.innerWidth >= 520) init();
 
   async function init() {
     const canvas = document.getElementById('ascii-canvas');
     if (!canvas) return;
+    console.log('[AsciiViewer] init');
 
     const parent = canvas.parentElement;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'high-performance' });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
     const glCtx = renderer.getContext();
     const maxRB = glCtx ? glCtx.getParameter(glCtx.MAX_RENDERBUFFER_SIZE) : 2048;
-    const targetW = Math.min(parent.clientWidth || 800, maxRB * 0.9);
-    const pr = Math.max(1, Math.min(devicePixelRatio, 1.5, maxRB / (targetW || 1)));
+    const pr = Math.max(1, Math.min(devicePixelRatio, 1.5, maxRB / (parent.clientWidth || 800)));
     renderer.setPixelRatio(pr);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.8;
     renderer.setClearColor(0x000000, 0);
+    console.log('[AsciiViewer] renderer ready, maxRB:', maxRB, 'pr:', pr);
 
     const scene = new THREE.Scene();
-    scene.background = null;
 
-    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 0, 4.5);
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 50);
+    camera.position.set(0, 0.5, 5);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.08));
-    const l1 = new THREE.DirectionalLight(0xffffff, 6); l1.position.set(2,3.5,6); scene.add(l1);
-    const l2 = new THREE.DirectionalLight(0xffffff, 0.35); l2.position.set(-2,1.5,4); scene.add(l2);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+    const l1 = new THREE.DirectionalLight(0xffffff, 5); l1.position.set(3, 4, 6); scene.add(l1);
+    const l2 = new THREE.DirectionalLight(0xffffff, 0.5); l2.position.set(-3, 1, 4); scene.add(l2);
 
     const group = new THREE.Group();
-    group.position.set(0.4, -0.6, 0);
-    group.scale.setScalar(0.13);
     scene.add(group);
 
-    let mixer=null, action=null, finished=false, clipDuration=0, animStartTime=0;
-    let rotY=0, autoRotate=false, dragging=false, lx=0, ly=0, dx=0, dy=0;
-    let cameraAnimId = null;
+    let mixer = null, action = null, finished = false;
+    let rotY = 0, autoRotate = true, dragging = false, lx = 0, ly = 0, dx = 0, dy = 0;
     window.__startAutoRotate = () => { autoRotate = true; };
-    window.__restartAnim = () => {
-      if(mixer&&action&&clipDuration) {
-        finished=false;
-        action.enabled=true;
-        mixer.stopAllAction();
-        action.time = animStartTime;
-        action.play();
-      }
-    };
-    window.__zoomCamera = (z, duration) => {
-      if (cameraAnimId) { cancelAnimationFrame(cameraAnimId); cameraAnimId = null; }
-      if (!duration || duration <= 0) {
-        camera.position.z = z;
-        camera.updateProjectionMatrix();
-        return;
-      }
-      const startZ = camera.position.z;
-      const startTime = performance.now();
-      function step() {
-        const t = Math.min((performance.now() - startTime) / duration, 1);
-        camera.position.z = startZ + (z - startZ) * t;
-        camera.updateProjectionMatrix();
-        if (t < 1) cameraAnimId = requestAnimationFrame(step);
-        else cameraAnimId = null;
-      }
-      step();
+    window.__restartAnim = () => { if (mixer && action) { finished = false; mixer.stopAllAction(); action.play(); } };
+    window.__zoomCamera = (z, d) => {
+      if (!z) { camera.position.z = z; camera.updateProjectionMatrix(); return; }
     };
 
     const models = [
-      // '/nekomata_okayu_hololive.glb',
-      // '/teto_pear.glb',
-      // '/poteto.glb',
-      '/visible_interactive_human_-_exploding_skull.glb',
+      '/poteto.glb',
+      '/nekomata_okayu_hololive.glb',
+      '/teto_pear.glb',
       '/heart_-_animated_anatomical_3d_model.glb',
-      // '/chito__anime_character.glb'
+      '/visible_interactive_human_-_exploding_skull.glb',
     ];
     const modelPath = models[Math.floor(Math.random() * models.length)];
     const isSkull = modelPath.includes('skull');
     const isHeart = modelPath.includes('heart');
     const isNekomata = modelPath.includes('nekomata');
-    const isTeto = modelPath.includes('teto');
     const isPoteto = modelPath.includes('poteto');
-    const isChito = modelPath.includes('chito');
-    if (isNekomata) {
-      group.scale.setScalar(0.9);
-      group.position.y = -2.5;
-    }
-    if (isTeto) group.scale.setScalar(0.39);
-    if (isPoteto) {
-      group.scale.setScalar(0.09);
-      group.position.y = 0.2;
-    }
-    if (isHeart) {
-      group.scale.setScalar(0.012);
-      group.position.y = 0.4;
-    }
-    if (isChito) {
-      group.scale.setScalar(1.04);
-      group.position.y = -1.3;
-    }
+    console.log('[AsciiViewer] loading:', modelPath);
+
+    if (isPoteto) { group.scale.setScalar(0.09); group.position.y = 0.2; }
+    else if (isNekomata) { group.scale.setScalar(0.9); group.position.y = -2.5; }
+    else if (isHeart) { group.scale.setScalar(0.012); group.position.y = 0.4; }
+    else if (isSkull) { group.scale.setScalar(0.13); group.position.set(0.4, -0.6, 0); }
+    else { group.scale.setScalar(0.39); }
 
     new GLTFLoader().load(modelPath, gltf => {
+      console.log('[AsciiViewer] model loaded:', modelPath);
       if (isSkull || isHeart) {
         const mat = new THREE.MeshStandardMaterial({ color: 0x826cf6, roughness: 0.12, metalness: 0 });
-        gltf.scene.traverse(o => { if(o.isMesh){ if(o.material) o.material.dispose(); o.material = mat; } });
+        gltf.scene.traverse(o => { if (o.isMesh) { if (o.material) o.material.dispose(); o.material = mat; } });
       }
       group.add(gltf.scene);
-      if(gltf.animations?.length) {
+      if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(gltf.scene);
         const clip = gltf.animations[0];
-        clipDuration = clip.duration;
-        animStartTime = (isSkull || isHeart || isChito) ? clip.duration * 0.56 : 0;
+        const startTime = isSkull || isHeart ? clip.duration * 0.56 : 0;
         action = mixer.clipAction(clip);
-        if (isHeart || isChito) {
-          action.setLoop(THREE.LoopRepeat);
-          action.clampWhenFinished = false;
-        } else {
-          action.setLoop(THREE.LoopOnce);
-          action.clampWhenFinished = true;
-        }
-        action.time = animStartTime;
+        action.setLoop(isHeart ? THREE.LoopRepeat : THREE.LoopOnce);
+        action.clampWhenFinished = !isHeart;
+        action.time = startTime;
         action.play();
       }
-    }, undefined, err => console.error('[AsciiViewer] GLB error', err));
+    }, undefined, err => console.error('[AsciiViewer] load error', err));
 
     function resize() {
       const w = parent.clientWidth, h = parent.clientHeight;
-      if(!w||!h) return;
+      if (!w || !h) return;
       renderer.setSize(w, h);
-      camera.aspect = w/h; camera.updateProjectionMatrix();
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
     }
     requestAnimationFrame(() => requestAnimationFrame(resize));
-    const ro = new ResizeObserver(resize);
-    ro.observe(parent);
-    window.__resizeCanvas = resize;
+    new ResizeObserver(resize).observe(parent);
 
-    canvas.addEventListener('pointerdown', e => { dragging=true; lx=e.clientX; ly=e.clientY; });
-    window.addEventListener('pointermove', e => { if(!dragging) return; dy+=(e.clientY-ly)*.005; dx+=(e.clientX-lx)*.005; lx=e.clientX; ly=e.clientY; });
-    window.addEventListener('pointerup', () => { dragging=false; });
-
-    // ── Start raw render first, then add ASCII effect after delay (skull/heart only) ──
-    const SYMBOLS = ['.',':','-','=','+','*','#','%','@','O','N','M','W','B','8','&','$','█','▓','▒','░'];
-
-    let composer = null, fx = null;
-
-    if (isSkull || isHeart) {
-      let frameCount = 0;
-      function tryLoadEffect() {
-        frameCount++;
-        if (frameCount < 8) { requestAnimationFrame(tryLoadEffect); return; }
-        loadEffect();
-      }
-      requestAnimationFrame(tryLoadEffect);
-    }
-
-    async function loadEffect() {
-      try {
-        const w = parent.clientWidth, h = parent.clientHeight;
-        if (!w || !h) {
-          requestAnimationFrame(() => loadEffect());
-          return;
-        }
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-
-        const pp = await import('postprocessing');
-
-        const frag = `
-uniform float cellSize;
-uniform bool invert;
-uniform bool colorMode;
-uniform int asciiStyle;
-uniform float time;
-uniform vec2 resolution;
-uniform vec2 mousePos;
-uniform float contrastAdjust;
-uniform sampler2D glyphAtlas;
-uniform float glyphTiles;
-uniform bool useGlyphAtlas;
-uniform bool volumeShading;
-uniform bool useTintColor;
-uniform vec3 tintColor;
-float r2(vec2 s){return fract(sin(dot(s,vec2(12.9898,78.233)))*43758.5453);}
-float g(float b,vec2 p){if(b<0.01)return 0.;vec2 g=floor(p*4.);float d=g.x==1.&&g.y==1.?1.:0.,bl=(g.x==1.||g.x==2.)&&(g.y==1.||g.y==2.)?1.:0.,bh=g.y==1.||g.y==2.?1.:0.,bh2=g.y==0.||g.y==3.?1.:g.y==1.||g.y==2.?.5:0.,e=g.x==0.||g.x==2.||g.y==0.||g.y==2.?1.:.3,t0=1.-smoothstep(0.,.15,b),t1=smoothstep(.08,.22,b)*(1.-smoothstep(.22,.35,b)),t2=smoothstep(.2,.38,b)*(1.-smoothstep(.38,.5,b)),t3=smoothstep(.35,.52,b)*(1.-smoothstep(.52,.65,b)),t4=smoothstep(.5,.7,b)*(1.-smoothstep(.7,.82,b)),t5=smoothstep(.68,1.,b);return clamp(d*t0*.5+bl*t1+bh*t2+bh2*t3+e*t4+t5,0.,1.);}
-void mainImage(const in vec4 _,const in vec2 u,out vec4 o){vec4 cl=texture(inputBuffer,u);float br=dot(cl.rgb,vec3(.299,.587,.114));br=(br-.5)*contrastAdjust+.5;if(invert)br=1.-br;float bf=volumeShading?clamp((br-.5)*1.6+.5,0.,1.):br;vec2 lv=fract(u*resolution/cellSize);float cv;if(dot(cl.rgb,vec3(.299,.587,.114))<0.06)cv=0.;else if(useGlyphAtlas&&glyphTiles>0.){float ti=clamp(floor(bf*glyphTiles),0.,glyphTiles-1.);cv=texture(glyphAtlas,vec2((ti+0.02+lv.x*(1.-0.04))/glyphTiles,0.02+lv.y*(1.-0.04))).r;}else cv=g(bf,lv);vec3 fc=colorMode?useTintColor?tintColor*cv:cl.rgb*cv:vec3(br*cv);o=vec4(fc,cl.a);}
-`;
-
-        const glyphTex = (()=>{
-          const c=document.createElement('canvas');c.width=64*SYMBOLS.length;c.height=64;
-          const x=c.getContext('2d');if(!x)return null;
-          x.fillStyle='#000';x.fillRect(0,0,c.width,c.height);
-          x.fillStyle='#fff';x.font='62px monospace';x.textAlign='center';x.textBaseline='middle';
-          SYMBOLS.forEach((s,i)=>x.fillText(s,i*64+32,32));
-          const t=new THREE.CanvasTexture(c);t.needsUpdate=true;t.minFilter=t.magFilter=THREE.LinearFilter;return t;
-        })();
-
-        class AsciiFX extends pp.Effect {
-          constructor(){
-            super('AsciiFX',frag,{
-              blendFunction:pp.BlendFunction.NORMAL,
-              uniforms:new Map([
-                ['cellSize',new THREE.Uniform(12)],
-                ['invert',new THREE.Uniform(true)],
-                ['colorMode',new THREE.Uniform(true)],
-                ['asciiStyle',new THREE.Uniform(0)],
-                ['time',new THREE.Uniform(0)],
-                ['resolution',new THREE.Uniform(new THREE.Vector2(renderer.domElement.width,renderer.domElement.height))],
-                ['mousePos',new THREE.Uniform(new THREE.Vector2(0,0))],
-                ['glyphAtlas',new THREE.Uniform(glyphTex)],
-                ['glyphTiles',new THREE.Uniform(SYMBOLS.length)],
-                ['useGlyphAtlas',new THREE.Uniform(!!glyphTex)],
-                ['volumeShading',new THREE.Uniform(true)],
-                ['useTintColor',new THREE.Uniform(true)],
-                ['tintColor',new THREE.Uniform(new THREE.Vector3(0.5098,0.4235,0.9647))],
-                ['contrastAdjust',new THREE.Uniform(2.2)],
-              ])
-            });
-            this._t=0;
-          }
-          update(_,__,dt){this._t+=dt||0;this.uniforms.get('time').value=this._t;}
-        }
-
-        fx = new AsciiFX();
-        if (isNekomata) fx.uniforms.get('useTintColor').value = false;
-
-        ro.disconnect();
-        const resizeFX = () => {
-          const w = parent.clientWidth, h = parent.clientHeight;
-          if(!w||!h) return;
-          renderer.setSize(w, h);
-          camera.aspect = w/h; camera.updateProjectionMatrix();
-          if(fx) fx.uniforms.get('resolution').value.set(renderer.domElement.width, renderer.domElement.height);
-          if(composer) composer.setSize(renderer.domElement.width, renderer.domElement.height);
-        };
-        new ResizeObserver(resizeFX).observe(parent);
-        window.__resizeCanvas = resizeFX;
-        resizeFX();
-
-        composer = new pp.EffectComposer(renderer);
-        composer.addPass(new pp.RenderPass(scene, camera));
-        const ep = new pp.EffectPass(camera, fx);
-        ep.renderToScreen = true;
-        composer.addPass(ep);
-
-        resizeFX();
-      } catch(e) {
-        console.warn('[AsciiViewer] ASCII effect unavailable, raw render continues', e);
-      }
-    }
+    canvas.addEventListener('pointerdown', e => { dragging = true; lx = e.clientX; ly = e.clientY; });
+    window.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      dy += (e.clientY - ly) * 0.005;
+      dx += (e.clientX - lx) * 0.005;
+      lx = e.clientX; ly = e.clientY;
+    });
+    window.addEventListener('pointerup', () => { dragging = false; });
 
     const clock = new THREE.Clock();
-    function loop() {
+    (function loop() {
       requestAnimationFrame(loop);
       const dt = clock.getDelta();
-      if(mixer&&!finished) {
+      if (mixer && !finished) {
         mixer.update(dt);
-        if(action&&action.time>=action.getClip().duration-0.01&&!isHeart&&!isChito) finished=true;
+        if (action && action.time >= action.getClip().duration - 0.01 && !isHeart) finished = true;
       }
-      if(autoRotate && !dragging) rotY += dt * 0.4;
+      if (autoRotate && !dragging) rotY += dt * 0.4;
       group.rotation.x = dy + 0.3;
       group.rotation.y = dx + rotY;
       group.rotation.z = -0.08;
-      if(composer) {
-        renderer.setRenderTarget(null);
-        renderer.clear();
-        composer.render(dt);
-      }
-      else renderer.render(scene, camera);
-    }
-    loop();
+      renderer.render(scene, camera);
+    })();
   }
 </script>
 
