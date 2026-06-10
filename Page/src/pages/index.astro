@@ -184,7 +184,7 @@ const base = import.meta.env.BASE_URL;
     ];
 
     let sec = 0;
-    const lineCount = 300;
+    const lineCount = 60;
 
     for (let i = 0; i < lineCount; i++) {
       const t = ts(sec);
@@ -287,7 +287,7 @@ const base = import.meta.env.BASE_URL;
                       setTimeout(() => {
                         if (window.__startAutoRotate) window.__startAutoRotate();
 
-                        const dur = 400;
+                        const dur = 900;
                         model.style.transition = `transform ${dur}ms linear`;
                         model.style.transform = 'translateX(0) scale(1)';
                         if (window.__zoomCamera) window.__zoomCamera(4.5, dur);
@@ -298,6 +298,7 @@ const base = import.meta.env.BASE_URL;
                           content.style.transition = 'opacity 0.6s ease 0.3s';
                           content.style.opacity = '1';
                         }
+                      }, 1000);
                     });
                   }, 350);
                 }, 300);
