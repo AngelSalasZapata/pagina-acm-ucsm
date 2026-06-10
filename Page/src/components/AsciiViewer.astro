@@ -42,24 +42,16 @@
     };
 
     const models = [
-      '/poteto.glb',
-      '/nekomata_okayu_hololive.glb',
-      '/teto_pear.glb',
-      '/heart_-_animated_anatomical_3d_model.glb',
       '/visible_interactive_human_-_exploding_skull.glb',
+      '/heart_-_animated_anatomical_3d_model.glb',
     ];
     const modelPath = models[Math.floor(Math.random() * models.length)];
     const isSkull = modelPath.includes('skull');
     const isHeart = modelPath.includes('heart');
-    const isNekomata = modelPath.includes('nekomata');
-    const isPoteto = modelPath.includes('poteto');
     console.log('[AsciiViewer] loading:', modelPath);
 
-    if (isPoteto) { group.scale.setScalar(0.09); group.position.y = 0.2; }
-    else if (isNekomata) { group.scale.setScalar(0.9); group.position.y = -2.5; }
-    else if (isHeart) { group.scale.setScalar(0.012); group.position.y = 0.4; }
-    else if (isSkull) { group.scale.setScalar(0.13); group.position.set(0.4, -0.6, 0); }
-    else { group.scale.setScalar(0.39); }
+    if (isHeart) { group.scale.setScalar(0.012); group.position.y = 0.4; }
+    if (isSkull) { group.scale.setScalar(0.13); group.position.set(0.4, -0.6, 0); }
 
     new GLTFLoader().load(modelPath, gltf => {
       console.log('[AsciiViewer] model loaded:', modelPath);
