@@ -63,12 +63,13 @@
       if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(gltf.scene);
         const clip = gltf.animations[0];
-        const startTime = isSkull ? clip.duration * 0.5 : isHeart ? clip.duration * 0.56 : 0;
+        const startTime = isSkull ? (clip.duration ? clip.duration * 0.5 : 0) : isHeart ? clip.duration * 0.56 : 0;
+        console.log('[AsciiViewer] anim duration:', clip.duration, 'startTime:', startTime);
         action = mixer.clipAction(clip);
         action.setLoop(isHeart ? THREE.LoopRepeat : THREE.LoopOnce);
         action.clampWhenFinished = !isHeart;
-        action.time = startTime;
         action.play();
+        action.time = startTime;
       }
     }, undefined, err => console.error('[AsciiViewer] load error', err));
 
