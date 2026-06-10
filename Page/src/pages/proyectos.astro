@@ -81,26 +81,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const section = document.getElementById('projects-hscroll');
   const track = document.querySelector('.projects-track');
   const cards = document.querySelectorAll('.project-card');
-  if (!section || !track) return;
 
-  function getMaxX() { return Math.max(0, track.scrollWidth - window.innerWidth); }
+  if (section && track) {
+    function getMaxX() { return Math.max(0, track.scrollWidth - window.innerWidth); }
 
-  function updateTrack() {
-    const rect = section.getBoundingClientRect();
-    const sh = rect.height, vh = window.innerHeight;
-    const progress = Math.max(0, Math.min(1, (vh - rect.top) / (sh - vh)));
-    track.style.transform = `translateX(${-progress * getMaxX()}px)`;
+    function updateTrack() {
+      const rect = section.getBoundingClientRect();
+      const sh = rect.height, vh = window.innerHeight;
+      const progress = Math.max(0, Math.min(1, (vh - rect.top) / (sh - vh)));
+      track.style.transform = `translateX(${-progress * getMaxX()}px)`;
+      requestAnimationFrame(updateTrack);
+    }
     requestAnimationFrame(updateTrack);
-  }
-  requestAnimationFrame(updateTrack);
 
-  cards.forEach((card, i) => {
-    const s = 0.05 + i * 0.22;
-    scroll(
-      animate(card, { x: [80, 0], opacity: [0, 1] }),
-      { target: section, offset: [s, s + 0.18] }
-    );
-  });
+    cards.forEach((card, i) => {
+      const s = 0.05 + i * 0.22;
+      scroll(
+        animate(card, { x: [80, 0], opacity: [0, 1] }),
+        { target: section, offset: [s, s + 0.18] }
+      );
+    });
+  }
 </script>
 
 <style>
