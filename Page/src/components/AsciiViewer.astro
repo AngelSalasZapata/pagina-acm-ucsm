@@ -143,11 +143,10 @@
     let composer = null, fx = null;
 
     if (isSkull || isHeart) {
-      // Wait 3 frames before loading postprocessing (avoids "Framebuffer not complete")
       let frameCount = 0;
       function tryLoadEffect() {
         frameCount++;
-        if (frameCount < 4) { requestAnimationFrame(tryLoadEffect); return; }
+        if (frameCount < 8) { requestAnimationFrame(tryLoadEffect); return; }
         loadEffect();
       }
       requestAnimationFrame(tryLoadEffect);
@@ -155,6 +154,15 @@
 
     async function loadEffect() {
       try {
+        const w = parent.clientWidth, h = parent.clientHeight;
+        if (!w || !h) {
+          requestAnimationFrame(() => loadEffect());
+          return;
+        }
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+
         const pp = await import('postprocessing');
 
         const frag = `
