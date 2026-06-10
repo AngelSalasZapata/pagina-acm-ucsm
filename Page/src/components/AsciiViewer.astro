@@ -132,7 +132,7 @@
       renderer.setSize(w, h);
       camera.aspect = w/h; camera.updateProjectionMatrix();
     }
-    resize();
+    requestAnimationFrame(() => requestAnimationFrame(resize));
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
     window.__resizeCanvas = resize;
