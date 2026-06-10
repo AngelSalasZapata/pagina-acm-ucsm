@@ -52,30 +52,86 @@ const base = import.meta.env.BASE_URL;
 
     <div class="reveal-stage" id="reveal-stage">
       <div class="reveal-purple" id="reveal-purple">
-        <div class="content-inner">
-          <h2 class="section-title">Team</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+        <div class="content-inner" style="max-width:920px">
+          <h2 class="section-title" style="font-family:'Vintage','VT323',monospace;color:#cae4c5;font-size:clamp(3rem,6vw,6rem);margin-bottom:24px">Nuestro equipo</h2>
+          <div class="team-grid">
+            <div class="team-card">
+              <img class="team-avatar" src="/arelyx.jpg" alt="" draggable="false" />
+              <span class="team-name">Andry Caceres</span>
+              <span class="team-email">andry@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Santiago Cusirramos</span>
+              <span class="team-email">santiago@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Fernando Pacheco</span>
+              <span class="team-email">fernando@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Christian Revilla</span>
+              <span class="team-email">christian@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Miembro 5</span>
+              <span class="team-email">m5@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Miembro 6</span>
+              <span class="team-email">m6@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Miembro 7</span>
+              <span class="team-email">m7@ucsm.edu.pe</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar-placeholder"></div>
+              <span class="team-name">Miembro 8</span>
+              <span class="team-email">m8@ucsm.edu.pe</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="reveal-green" id="reveal-green">
         <div class="content-inner">
-          <h2 class="section-title">Christian</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+          <h2 class="section-title" style="font-family:'Vintage','VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px">Christian Revilla</h2>
+          <div class="presidente-border-wrap">
+            <svg class="presidente-border-svg">
+              <rect fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="6" stroke-dasharray="16 12" />
+            </svg>
+            <p class="presidente-text" style="font-family:'VT323',monospace;color:#fff;font-size:clamp(2.2rem,4.5vw,3rem);background:#000;padding:0 14px;display:inline-block;margin:0;line-height:1.2">Sponsor</p>
+          </div>
         </div>
       </div>
 
       <div class="reveal-blue" id="reveal-blue">
         <div class="content-inner">
-          <h2 class="section-title">Fernando</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+          <h2 class="section-title" style="font-family:'Vintage','VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px">Fernando Pacheco</h2>
+          <div class="presidente-border-wrap">
+            <svg class="presidente-border-svg">
+              <rect fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="6" stroke-dasharray="16 12" />
+            </svg>
+            <p class="presidente-text" style="font-family:'VT323',monospace;color:#fff;font-size:clamp(2.2rem,4.5vw,3rem);background:#000;padding:0 14px;display:inline-block;margin:0;line-height:1.2">Tesorero</p>
+          </div>
         </div>
       </div>
 
       <div class="reveal-red" id="reveal-red">
         <div class="content-inner">
-          <h2 class="section-title">Santiago</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+          <h2 class="section-title" style="font-family:'Vintage','VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px">Santiago Cusirramos</h2>
+          <div class="presidente-border-wrap">
+            <svg class="presidente-border-svg">
+              <rect fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="6" stroke-dasharray="16 12" />
+            </svg>
+            <p class="presidente-text" style="font-family:'VT323',monospace;color:#fff;font-size:clamp(2.2rem,4.5vw,3rem);background:#000;padding:0 14px;display:inline-block;margin:0;line-height:1.2">Vicepresidente</p>
+          </div>
         </div>
       </div>
 
@@ -86,14 +142,15 @@ const base = import.meta.env.BASE_URL;
             <div class="card-nick">_AR3LYX1</div>
             <img class="hongo-gif" src="/hongo.gif" alt="" draggable="false" />
           </div>
-          <div class="drag-card is-square" data-left="55" data-top="8">
+          <div class="drag-card is-square folder-card" data-left="55" data-top="8">
             <img class="folder-git-img" src="/folderGit.png" alt="" draggable="false" />
+            <div class="folder-label">Click The Folder</div>
           </div>
-          <div class="drag-card is-square" data-left="5" data-top="56">
-            <div class="card-role">ig</div>
-          </div>
-          <div class="drag-card" data-left="55" data-top="56">
-            <div class="card-role">otros</div>
+          <div class="drag-card card-email" data-left="55" data-top="56">
+            <div class="email-content">
+              <span class="email-text">andry.caceres@estudiante.ucsm.edu.pe</span>
+              <img class="email-gif" src="/email.gif" alt="" draggable="false" />
+            </div>
           </div>
           <div class="drag-card card-frame" data-left="28" data-top="24">
             <div class="frame-wrap">
@@ -110,23 +167,42 @@ const base = import.meta.env.BASE_URL;
 <div class="drag-card github-streak-card" id="github-modal" data-left="40" data-top="30" style="display: none; z-index: 100; min-width:320px; max-width:90vw;">
   <div class="github-modal-window">
     <div class="win-titlebar">
+      <span class="win-icon"><img src="/folderGit.png" alt="" style="width:16px;height:16px;image-rendering:pixelated;vertical-align:middle;margin-right:4px" /></span>
       <span class="win-title">GitHub Streak</span>
-      <button class="win-close" id="github-streak-close" style="position:absolute;top:0;right:0;width:32px;height:32px;line-height:32px;background:#c0c0c0;border:2px solid #808080;box-shadow:0 2px 4px #2228;z-index:9999;font-size:20px;cursor:pointer;pointer-events:auto;">✕</button>
+      <button class="win-close" id="github-streak-close">✕</button>
     </div>
     <div class="win-body">
       <img src="https://streak-stats.demolab.com?user=ArelyX1&theme=radical&hide_border=true&exclude_days=Sun%2CTue%2CFri" alt="GitHub Streak" />
     </div>
   </div>
 </div>
+<div class="drag-card instagram-modal-card" id="instagram-modal" data-left="35" data-top="15" style="display: none; z-index: 100; min-width:380px; max-width:600px; width:540px;">
+  <div class="github-modal-window">
+    <div class="win-titlebar">
+      <span class="win-icon"><img src="/email.gif" alt="" style="width:16px;height:16px;image-rendering:pixelated;vertical-align:middle;margin-right:4px" /></span>
+      <span class="win-title">Instagram</span>
+      <button class="win-close" id="instagram-modal-close">✕</button>
+    </div>
+    <div class="win-body" style="padding:0;">
+      <iframe src="https://www.instagram.com/p/DXYXXUhDVDs/embed" width="100%" height="640" frameborder="0" scrolling="no" allowtransparency="true" style="border:none;overflow:hidden;display:block;"></iframe>
+    </div>
+  </div>
+</div>
         </div>
         <div class="content-inner">
-          <h2 class="section-title" style="font-family:'VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px"><span style="position:relative;display:inline-block">Andry<img class="comme-img" src="/comme.png" alt="" draggable="false" /></span></h2>
+          <h2 class="section-title" style="font-family:'Vintage','VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px"><span style="position:relative;display:inline-block">Andry Caceres<img class="comme-img" src="/comme.png" alt="" draggable="false" /></span></h2>
           <div class="presidente-border-wrap">
             <svg class="presidente-border-svg">
               <rect fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="6" stroke-dasharray="16 12" />
             </svg>
             <p class="presidente-text" style="font-family:'VT323',monospace;color:#fff;font-size:clamp(2.2rem,4.5vw,3rem);background:#000;padding:0 14px;display:inline-block;margin:0;line-height:1.2">Presidente</p>
           </div>
+        </div>
+      </div>
+
+      <div class="reveal-intro" id="reveal-intro">
+        <div class="content-inner">
+          <h2 class="section-title" style="font-family:'Vintage','VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px">Nuestro equipo</h2>
         </div>
       </div>
 
@@ -137,6 +213,12 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
+  @font-face {
+    font-family: 'Vintage';
+    src: url('/fonts/215000E.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
   .scroll-reveal {
     position: relative;
     background: rgba(13, 20, 13, 0.65);
@@ -182,6 +264,76 @@ const base = import.meta.env.BASE_URL;
   .reveal-purple .section-title { color: #fff; }
   .reveal-purple .accent5 { color: #ffcc00; }
   .reveal-purple p { color: #ecc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(12px, 2vw, 20px);
+    padding: 0 8px;
+  }
+
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: clamp(12px, 2vw, 20px) 8px;
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .team-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.14);
+  }
+
+  .team-avatar,
+  .team-avatar-placeholder {
+    width: clamp(48px, 8vw, 80px);
+    height: clamp(48px, 8vw, 80px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+
+  .team-avatar-placeholder {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+  }
+
+  .team-name {
+    font-family: 'VT323', monospace;
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 1.15;
+  }
+
+  .team-email {
+    font-family: 'VT323', monospace;
+    font-size: clamp(11px, 1vw, 14px);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    word-break: break-all;
+  }
+
+  @media (max-width: 640px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    #reveal-white .drag-card {
+      display: none !important;
+    }
+
+    #reveal-white .card-email {
+      display: flex !important;
+    }
+  }
 
   .reveal-green {
     position: absolute;
@@ -230,6 +382,21 @@ const base = import.meta.env.BASE_URL;
   .reveal-red .section-title { color: #fff; }
   .reveal-red .accent2 { color: #ffcc00; }
   .reveal-red p { color: #fcc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
+
+  .reveal-intro {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 6;
+    background: #000;
+    opacity: 1;
+    pointer-events: none;
+    will-change: opacity;
+  }
+
+  .reveal-intro .section-title { color: #fff; }
 
   .reveal-content {
     position: absolute;
@@ -430,6 +597,44 @@ const base = import.meta.env.BASE_URL;
     user-select: none;
   }
 
+  .folder-card {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 12%;
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  .folder-card .folder-git-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+  }
+
+  .folder-label {
+    font-family: 'VT323', monospace;
+    font-size: clamp(16px, 2vw, 26px);
+    font-weight: 700;
+    color: #cae4c5;
+    -webkit-text-stroke: 1px #000;
+    paint-order: stroke fill;
+    text-shadow: 0 0 3px #000;
+    background: transparent;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    text-align: center;
+    line-height: 1;
+    margin-top: -20px;
+  }
+
   .drag-card.is-square[data-left="75"][data-top="56"] {
     width: 12%;
     padding: 0;
@@ -451,6 +656,49 @@ const base = import.meta.env.BASE_URL;
     padding: 0;
     background: none;
     border: none;
+  }
+
+  .drag-card.card-email[data-left="55"][data-top="56"] {
+    width: auto;
+    background: #000;
+    border: 10px solid transparent;
+    border-image: url('/midfrrame.gif') 10 / 10px / 0 round;
+    border-radius: 0;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+  }
+
+  .email-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+  }
+
+  .email-text {
+    font-family: 'VT323', monospace;
+    font-size: clamp(16px, 2.4vw, 26px);
+    color: #0f0;
+    white-space: nowrap;
+  }
+
+  .email-gif {
+    height: clamp(28px, 4vw, 40px);
+    width: auto;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  .instagram-modal-card {
+    background: none !important;
+    backdrop-filter: none;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
   }
 
   .github-modal {
@@ -488,12 +736,22 @@ const base = import.meta.env.BASE_URL;
   .win-titlebar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background: linear-gradient(90deg, #000080, #1084d0);
     color: #fff;
     padding: 4px 4px 4px 8px;
     font-size: 14px;
     user-select: none;
+    gap: 4px;
+  }
+
+  .win-titlebar .win-close {
+    margin-left: auto;
+  }
+
+  .win-icon {
+    display: flex;
+    align-items: center;
+    line-height: 1;
   }
 
   .win-close {
@@ -519,18 +777,32 @@ const base = import.meta.env.BASE_URL;
 
   .win-body {
     padding: 8px;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
   }
 
   .win-body img {
     display: block;
     width: 100%;
     height: auto;
+    cursor: pointer;
+  }
+
+  .win-body img:hover {
+    filter: brightness(1.1);
   }
 
 .github-streak-card {
-  background: rgba(255,255,255,0.18) !important;
-  backdrop-filter: blur(2px);
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18), 0 0 1px white;
+  background: none !important;
+  backdrop-filter: none;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 </style>
 
@@ -553,8 +825,19 @@ const base = import.meta.env.BASE_URL;
     let maxZ = 10;
 
     cards.forEach(card => {
-      const leftPct = parseFloat(card.dataset.left);
-      const topPct = parseFloat(card.dataset.top);
+      let leftPct = parseFloat(card.dataset.left);
+      let topPct = parseFloat(card.dataset.top);
+      if (!card.classList.contains('github-streak-card') && !card.classList.contains('instagram-modal-card')) {
+        leftPct += (Math.random() - 0.5) * 30;
+        topPct += (Math.random() - 0.5) * 30;
+        const cardW = card.offsetWidth / container.offsetWidth * 100;
+        const cardH = card.offsetHeight / container.offsetHeight * 100;
+        leftPct = Math.max(0, Math.min(100 - cardW, leftPct));
+        topPct = Math.max(0, Math.min(100 - cardH, topPct));
+        if (leftPct > 18 && leftPct < 72 && topPct > 15 && topPct < 72) {
+          leftPct = leftPct < 45 ? 8 : 72;
+        }
+      }
       card.style.left = leftPct + '%';
       card.style.top = topPct + '%';
       card.style.zIndex = maxZ++;
@@ -562,6 +845,7 @@ const base = import.meta.env.BASE_URL;
       let isDown = false, sx, sy, sl, st, lx, ly, lt;
 
       const onDown = (e) => {
+        if (e.target.closest('.win-close') || e.target.closest('.win-body img')) return;
         isDown = true;
         maxZ++;
         card.style.zIndex = maxZ;
@@ -576,10 +860,21 @@ const base = import.meta.env.BASE_URL;
         lx = e.clientX; ly = e.clientY; lt = performance.now();
       };
 
+      const clampPos = (leftPx, topPx) => {
+        const cr = container.getBoundingClientRect();
+        const cw = card.offsetWidth;
+        const ch = card.offsetHeight;
+        return {
+          left: Math.max(0, Math.min(cr.width - cw, leftPx)),
+          top: Math.max(0, Math.min(cr.height - ch, topPx)),
+        };
+      };
+
       const onMove = (e) => {
         if (!isDown) return;
-        card.style.left = (sl + e.clientX - sx) + 'px';
-        card.style.top = (st + e.clientY - sy) + 'px';
+        const p = clampPos(sl + e.clientX - sx, st + e.clientY - sy);
+        card.style.left = p.left + 'px';
+        card.style.top = p.top + 'px';
         lx = e.clientX; ly = e.clientY; lt = performance.now();
       };
 
@@ -597,8 +892,9 @@ const base = import.meta.env.BASE_URL;
             const cr = container.getBoundingClientRect();
             const br = card.getBoundingClientRect();
             card.style.transition = 'left 0.6s cubic-bezier(.22,1,.36,1), top 0.6s cubic-bezier(.22,1,.36,1)';
-            card.style.left = (br.left - cr.left + vx * 8) + 'px';
-            card.style.top = (br.top - cr.top + vy * 8) + 'px';
+            const fp = clampPos(br.left - cr.left + vx * 8, br.top - cr.top + vy * 8);
+            card.style.left = fp.left + 'px';
+            card.style.top = fp.top + 'px';
             card.style.scale = '1';
             setTimeout(() => { card.style.transition = 'none'; }, 700);
           }
@@ -619,13 +915,14 @@ const base = import.meta.env.BASE_URL;
   }
 
   function initReveal() {
+    const introEl = document.getElementById('reveal-intro');
     const whiteEl = document.getElementById('reveal-white');
     const redEl = document.getElementById('reveal-red');
     const blueEl = document.getElementById('reveal-blue');
     const greenEl = document.getElementById('reveal-green');
     const purpleEl = document.getElementById('reveal-purple');
     const section = document.getElementById('scroll-reveal');
-    if (!whiteEl || !redEl || !blueEl || !greenEl || !purpleEl || !section) return;
+    if (!introEl || !whiteEl || !redEl || !blueEl || !greenEl || !purpleEl || !section) return;
 
     const STEPS = 7;
     const stairWidth = 8;
@@ -678,39 +975,28 @@ const base = import.meta.env.BASE_URL;
         const scrolled = wh - rect.top;
         const pt = Math.max(0, Math.min(1, scrolled / totalScroll));
 
-        const split = 0.19;
-        const p1 = Math.min(pt / split, 1);
-        const p2 = pt > split ? Math.min((pt - split) / split, 1) : 0;
-        const p3 = pt > split * 2 ? Math.min((pt - split * 2) / split, 1) : 0;
-        const p4 = pt > split * 3 ? Math.min((pt - split * 3) / split, 1) : 0;
-        const p5 = pt > split * 4 ? Math.min((pt - split * 4) / split, 1) : 0;
+        const split = 0.16;
+        const p0 = 1 - Math.min(pt / split, 1);
+        const p1 = Math.min(Math.max(pt - split, 0) / split, 1);
+        const p2 = Math.min(Math.max(pt - split * 2, 0) / split, 1);
+        const p3 = Math.min(Math.max(pt - split * 3, 0) / split, 1);
+        const p4 = Math.min(Math.max(pt - split * 4, 0) / split, 1);
+        const p5 = Math.min(Math.max(pt - split * 5, 0) / split, 1);
 
-        whiteEl.style.clipPath = p2 > 0 ? polyStr(p2, off2) : (pt > 0 ? poly1(p1) : poly1(0));
+        introEl.style.opacity = p0;
 
-        if (p2 > 0) {
-          redEl.style.opacity = sp(p2);
-        } else {
-          redEl.style.clipPath = 'none';
-        }
+        whiteEl.style.clipPath = p2 > 0 ? polyStr(p2, off2) : (p1 > 0 ? poly1(p1) : poly1(0));
 
-        if (p3 > 0) {
-          redEl.style.clipPath = polyStr(p3, off2);
-          blueEl.style.opacity = sp(p3);
-        } else {
-          blueEl.style.clipPath = 'none';
-        }
+        redEl.style.opacity = p2 > 0 ? sp(p2) : 0;
+        redEl.style.clipPath = p3 > 0 ? polyStr(p3, off2) : 'none';
 
-        if (p4 > 0) {
-          blueEl.style.clipPath = polyStr(p4, off2);
-          greenEl.style.opacity = sp(p4);
-        } else {
-          greenEl.style.clipPath = 'none';
-        }
+        blueEl.style.opacity = p3 > 0 ? sp(p3) : 0;
+        blueEl.style.clipPath = p4 > 0 ? polyStr(p4, off2) : 'none';
 
-        if (p5 > 0) {
-          greenEl.style.clipPath = polyStr(p5, off2);
-          purpleEl.style.opacity = sp(p5);
-        }
+        greenEl.style.opacity = p4 > 0 ? sp(p4) : 0;
+        greenEl.style.clipPath = p5 > 0 ? polyStr(p5, off2) : 'none';
+
+        purpleEl.style.opacity = p5 > 0 ? sp(p5) : 0;
 
         ticking = false;
       });
@@ -721,22 +1007,22 @@ const base = import.meta.env.BASE_URL;
   }
 
   function initPresidenteBorder() {
-    const wrap = document.querySelector('.presidente-border-wrap');
-    if (!wrap) return;
-    const svg = wrap.querySelector('.presidente-border-svg');
-    const rect = svg.querySelector('rect');
-    const update = () => {
-      const w = wrap.offsetWidth;
-      const h = wrap.offsetHeight;
-      if (!w || !h) return;
-      svg.setAttribute('viewBox', `0 0 ${w + 12} ${h + 12}`);
-      rect.setAttribute('x', '2');
-      rect.setAttribute('y', '2');
-      rect.setAttribute('width', w + 8);
-      rect.setAttribute('height', h + 8);
-    };
-    update();
-    new ResizeObserver(update).observe(wrap);
+    document.querySelectorAll('.presidente-border-wrap').forEach(wrap => {
+      const svg = wrap.querySelector('.presidente-border-svg');
+      const rect = svg.querySelector('rect');
+      const update = () => {
+        const w = wrap.offsetWidth;
+        const h = wrap.offsetHeight;
+        if (!w || !h) return;
+        svg.setAttribute('viewBox', `0 0 ${w + 12} ${h + 12}`);
+        rect.setAttribute('x', '2');
+        rect.setAttribute('y', '2');
+        rect.setAttribute('width', w + 8);
+        rect.setAttribute('height', h + 8);
+      };
+      update();
+      new ResizeObserver(update).observe(wrap);
+    });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -745,20 +1031,46 @@ const base = import.meta.env.BASE_URL;
     initDragCards();
     initPresidenteBorder();
 
+    const showModal = (id, z) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.display = '';
+      el.style.zIndex = z;
+      const win = el.querySelector('.github-modal-window');
+      if (win) {
+        win.style.animation = 'none';
+        void win.offsetHeight;
+        win.style.animation = 'win-open 0.3s cubic-bezier(.34,1.56,.64,1) forwards';
+      }
+    };
+
     const folderGit = document.querySelector('.drag-card.is-square[data-left="55"][data-top="8"]');
-    const modal = document.getElementById('github-modal');
-    const closeBtn = document.getElementById('win-close');
-    if (folderGit && modal && closeBtn) {
+    const gitModal = document.getElementById('github-modal');
+    const gitClose = document.getElementById('github-streak-close');
+    const gitImg = gitModal?.querySelector('.win-body img');
+    if (folderGit && gitModal && gitClose) {
       folderGit.style.cursor = 'pointer';
       folderGit.addEventListener('click', () => {
-        modal.classList.add('open');
-        modal.querySelector('.github-modal-window').style.animation = 'none';
-        void modal.querySelector('.github-modal-window').offsetHeight;
-        modal.querySelector('.github-modal-window').style.animation = '';
+        showModal('github-modal', 120);
+        showModal('instagram-modal', 119);
       });
-      closeBtn.addEventListener('click', () => modal.classList.remove('open'));
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('open');
+      gitClose.addEventListener('click', (e) => {
+        gitModal.style.display = 'none';
+        e.stopPropagation();
+      });
+      if (gitImg) {
+        gitImg.addEventListener('click', () => {
+          window.open('https://github.com/arelyX1/', '_blank');
+        });
+      }
+    }
+
+    const igClose = document.getElementById('instagram-modal-close');
+    const igModal = document.getElementById('instagram-modal');
+    if (igClose && igModal) {
+      igClose.addEventListener('click', (e) => {
+        igModal.style.display = 'none';
+        e.stopPropagation();
       });
     }
   });
