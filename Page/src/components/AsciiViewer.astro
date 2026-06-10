@@ -64,12 +64,20 @@
         mixer = new THREE.AnimationMixer(gltf.scene);
         const clip = gltf.animations[0];
         const startTime = isSkull ? (clip.duration ? clip.duration * 0.5 : 0) : isHeart ? clip.duration * 0.56 : 0;
-        console.log('[AsciiViewer] anim duration:', clip.duration, 'startTime:', startTime);
+      console.log('[AsciiViewer] animations:', gltf.animations?.length, isSkull, isHeart);
+      if (gltf.animations && gltf.animations.length) {
+        mixer = new THREE.AnimationMixer(gltf.scene);
+        const clip = gltf.animations[0];
+        const startTime = isSkull ? (clip.duration ? clip.duration * 0.5 : 0) : isHeart ? clip.duration * 0.56 : 0;
+        console.log('[AsciiViewer] clip duration:', clip.duration, 'startTime:', startTime);
         action = mixer.clipAction(clip);
         action.setLoop(isHeart ? THREE.LoopRepeat : THREE.LoopOnce);
         action.clampWhenFinished = !isHeart;
         action.play();
         action.time = startTime;
+        console.log('[AsciiViewer] action.time after set:', action.time);
+      } else {
+        console.log('[AsciiViewer] no animations found');
       }
     }, undefined, err => console.error('[AsciiViewer] load error', err));
 
@@ -93,9 +101,14 @@
     window.addEventListener('pointerup', () => { dragging = false; });
 
     const clock = new THREE.Clock();
+    let frameCount = 0;
     (function loop() {
       requestAnimationFrame(loop);
       const dt = clock.getDelta();
+      if (mixer) {
+        if (frameCount < 10 && action) console.log('[AsciiViewer] frame', frameCount, 'action.time:', action.time, 'dt:', dt);
+        frameCount++;
+      }
       if (mixer && !finished) {
         mixer.update(dt);
         if (action && action.time >= action.getClip().duration - 0.01 && !isHeart) finished = true;
