@@ -12,8 +12,12 @@
 
     const parent = canvas.parentElement;
 
+    const glCtx = canvas.getContext('webgl2') || canvas.getContext('webgl');
+    const maxRB = glCtx ? glCtx.getParameter(glCtx.MAX_RENDERBUFFER_SIZE) : 2048;
+    const pr = Math.min(devicePixelRatio, maxRB / Math.max(parent.clientWidth || 1, 1), 1.5);
+
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.max(1, pr));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.8;
     renderer.setClearColor(0x000000, 0);
@@ -128,9 +132,9 @@
       renderer.setSize(w, h);
       camera.aspect = w/h; camera.updateProjectionMatrix();
     }
+    resize();
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
-    requestAnimationFrame(() => requestAnimationFrame(resize));
     window.__resizeCanvas = resize;
 
     canvas.addEventListener('pointerdown', e => { dragging=true; lx=e.clientX; ly=e.clientY; });
