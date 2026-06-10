@@ -4,70 +4,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Proyectos">
 
-  <!-- PROJECTS -->
-  <section class="events section" id="proyectos">
-    <div class="container">
-      <div class="section-label">// 04. PROYECTOS</div>
-      <h2 class="section-title">Nuestros <span class="accent">proyectos</span></h2>
-      <div class="events-timeline">
+  <section class="projects-hscroll" id="projects-hscroll">
+    <div class="projects-sticky">
+      <div class="projects-track">
+        <h2 class="projects-title">PROYECTOS ACM</h2>
 
-        <div class="event-card reveal">
-          <div class="event-date-block">
-            <span class="event-day">01</span>
-            <span class="event-month">ACM</span>
+        <div class="project-card" data-index="0">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Web" loading="lazy"/>
           </div>
-          <div class="event-img-wrap">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Proyecto" loading="lazy"/>
-            <div class="event-tag">Web</div>
-          </div>
-          <div class="event-body">
+          <div class="card-body">
+            <span class="card-num">01</span>
             <h3>Sitio Web ACM</h3>
-            <p>Plataforma oficial del capítulo estudiantil construida con Astro + Three.js. Modelos 3D interactivos, boot screen estilo terminal y diseño cyberpunk.</p>
-            <div class="event-meta">
-              <span>🔧 Astro · Three.js</span>
-              <span>👥 Equipo ACM</span>
+            <p>Plataforma oficial del capítulo con Astro + Three.js. Modelos 3D interactivos y boot screen estilo terminal.</p>
+            <div class="card-tags">
+              <span>Astro</span><span>Three.js</span><span>CSS</span>
             </div>
-            <a href="https://github.com/AngelSalasZapata/pagina-acm-ucsm" class="event-btn" target="_blank">Ver repositorio</a>
+            <a href="https://github.com/AngelSalasZapata/pagina-acm-ucsm" target="_blank" class="card-link">Ver repositorio →</a>
           </div>
         </div>
 
-        <div class="event-card reveal">
-          <div class="event-date-block">
-            <span class="event-day">02</span>
-            <span class="event-month">ACM</span>
+        <div class="project-card" data-index="1">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="Mobile" loading="lazy"/>
           </div>
-          <div class="event-img-wrap">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="Proyecto" loading="lazy"/>
-            <div class="event-tag">Mobile</div>
-          </div>
-          <div class="event-body">
+          <div class="card-body">
+            <span class="card-num">02</span>
             <h3>App ACM</h3>
-            <p>Aplicación móvil para estudiantes con eventos, horarios, foros y notificaciones en tiempo real.</p>
-            <div class="event-meta">
-              <span>🔧 React Native</span>
-              <span>📱 iOS / Android</span>
+            <p>Aplicación móvil con eventos, horarios, foros y notificaciones en tiempo real para estudiantes.</p>
+            <div class="card-tags">
+              <span>React Native</span><span>Firebase</span>
             </div>
-            <a href="#" class="event-btn">Próximamente</a>
+            <a href="#" class="card-link">Próximamente →</a>
           </div>
         </div>
 
-        <div class="event-card reveal">
-          <div class="event-date-block">
-            <span class="event-day">03</span>
-            <span class="event-month">ACM</span>
+        <div class="project-card" data-index="2">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80" alt="Data" loading="lazy"/>
           </div>
-          <div class="event-img-wrap">
-            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80" alt="Proyecto" loading="lazy"/>
-            <div class="event-tag">Data</div>
-          </div>
-          <div class="event-body">
+          <div class="card-body">
+            <span class="card-num">03</span>
             <h3>Dashboard ACM</h3>
-            <p>Panel de visualización de datos con métricas del capítulo, asistencia a eventos y estadísticas de membresía.</p>
-            <div class="event-meta">
-              <span>🔧 Python · React</span>
-              <span>📊 Dashboard</span>
+            <p>Panel de visualización con métricas del capítulo, asistencia a eventos y estadísticas de membresía.</p>
+            <div class="card-tags">
+              <span>Python</span><span>React</span><span>D3</span>
             </div>
-            <a href="#" class="event-btn">En desarrollo</a>
+            <a href="#" class="card-link">En desarrollo →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-index="3">
+          <div class="card-img">
+            <img src="https://images.unsplash.com/photo-1537432376144-e84978a2925d?w=600&q=80" alt="AI" loading="lazy"/>
+          </div>
+          <div class="card-body">
+            <span class="card-num">04</span>
+            <h3>ACM Bot</h3>
+            <p>Asistente virtual para resolver dudas sobre el capítulo, eventos, horarios y recursos académicos.</p>
+            <div class="card-tags">
+              <span>Python</span><span>LLM</span><span>Discord</span>
+            </div>
+            <a href="#" class="card-link">En desarrollo →</a>
           </div>
         </div>
 
@@ -76,3 +74,150 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
 </BaseLayout>
+
+<script>
+  import { scroll, animate } from 'motion';
+
+  const section = document.getElementById('projects-hscroll');
+  const track = document.querySelector('.projects-track');
+  const cards = document.querySelectorAll('.project-card');
+  if (!section || !track) return;
+
+  function getMaxX() { return Math.max(0, track.scrollWidth - window.innerWidth); }
+
+  function updateTrack() {
+    const rect = section.getBoundingClientRect();
+    const sh = rect.height, vh = window.innerHeight;
+    const progress = Math.max(0, Math.min(1, (vh - rect.top) / (sh - vh)));
+    track.style.transform = `translateX(${-progress * getMaxX()}px)`;
+    requestAnimationFrame(updateTrack);
+  }
+  requestAnimationFrame(updateTrack);
+
+  cards.forEach((card, i) => {
+    const s = 0.05 + i * 0.22;
+    scroll(
+      animate(card, { x: [80, 0], opacity: [0, 1] }),
+      { target: section, offset: [s, s + 0.18] }
+    );
+  });
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Nulshock';
+    src: url('/fonts/Nulshock Bd.otf') format('opentype');
+    font-display: swap;
+  }
+
+  .projects-hscroll {
+    position: relative;
+    height: 300vh;
+  }
+
+  .projects-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .projects-track {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 0 80px;
+    will-change: transform;
+  }
+
+  .projects-title {
+    font-family: 'Nulshock', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    color: var(--green);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 48px;
+    letter-spacing: 0.05em;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    will-change: transform, opacity;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+  .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-num {
+    font-family: 'Nulshock', sans-serif;
+    font-size: 1.25rem;
+    color: var(--green);
+    opacity: 0.6;
+  }
+
+  .card-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    color: #f6f4f3;
+    margin: 0;
+  }
+
+  .card-body p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(246,244,243,0.7);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .card-tags span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--green);
+  }
+
+  .card-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--green);
+    text-decoration: none;
+    margin-top: 8px;
+    transition: opacity 0.2s;
+  }
+  .card-link:hover {
+    opacity: 0.7;
+  }
+</style>
