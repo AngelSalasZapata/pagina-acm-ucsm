@@ -87,7 +87,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     function getStartX() {
       if (!title) return 0;
-      return (window.innerWidth - title.offsetWidth) / 2 - 48;
+      return (window.innerWidth - title.offsetWidth) / 2 - 0;
     }
 
     function getMaxX() { return Math.max(0, track.scrollWidth - window.innerWidth); }
@@ -101,6 +101,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       track.style.transform = `translateX(${centerOffset + progress * (endX - centerOffset)}px)`;
       requestAnimationFrame(updateTrack);
     }
+
+    document.fonts.ready.then(() => {
+      requestAnimationFrame(updateTrack);
+    });
     requestAnimationFrame(updateTrack);
 
     cards.forEach((card, i) => {
