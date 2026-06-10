@@ -50,7 +50,7 @@
     const isHeart = modelPath.includes('heart');
     console.log('[AsciiViewer] loading:', modelPath);
 
-    if (isHeart) { group.scale.setScalar(0.012); group.position.y = 0.6; }
+    if (isHeart) { group.scale.setScalar(0.010); group.position.y = 0.6; }
     if (isSkull) { group.scale.setScalar(0.13); group.position.set(0.4, 0.2, 0); }
 
     new GLTFLoader().load(modelPath, gltf => {
