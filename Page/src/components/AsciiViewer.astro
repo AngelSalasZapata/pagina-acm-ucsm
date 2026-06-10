@@ -34,7 +34,7 @@
     scene.add(group);
 
     let mixer = null, action = null, finished = false;
-    let rotY = 0, autoRotate = true, dragging = false, lx = 0, ly = 0, dx = 0, dy = 0;
+    let rotY = 0, autoRotate = false, dragging = false, lx = 0, ly = 0, dx = 0, dy = 0;
     window.__startAutoRotate = () => { autoRotate = true; };
     window.__restartAnim = () => { if (mixer && action) { finished = false; mixer.stopAllAction(); action.play(); } };
     window.__zoomCamera = (z, d) => {
@@ -50,8 +50,8 @@
     const isHeart = modelPath.includes('heart');
     console.log('[AsciiViewer] loading:', modelPath);
 
-    if (isHeart) { group.scale.setScalar(0.012); group.position.y = 0.8; }
-    if (isSkull) { group.scale.setScalar(0.13); group.position.set(0.4, 0.8, 0); }
+    if (isHeart) { group.scale.setScalar(0.012); group.position.y = 0.6; }
+    if (isSkull) { group.scale.setScalar(0.13); group.position.set(0.4, 0.2, 0); }
 
     new GLTFLoader().load(modelPath, gltf => {
       console.log('[AsciiViewer] model loaded:', modelPath);
