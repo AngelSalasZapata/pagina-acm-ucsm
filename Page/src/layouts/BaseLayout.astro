@@ -85,6 +85,12 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
         </li>
         <li>
           <a
+            href={`${base}proyectos`}
+            class:list={[{ active: currentPath === "/proyectos" }]}
+          >Proyectos</a>
+        </li>
+        <li>
+          <a
             href={`${base}galeria`}
             class:list={[{ active: currentPath === "/galeria" }]}
           >Galería</a>

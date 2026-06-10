@@ -1,0 +1,78 @@
+---
+// src/pages/proyectos.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Proyectos">
+
+  <!-- PROJECTS -->
+  <section class="events section" id="proyectos">
+    <div class="container">
+      <div class="section-label">// 04. PROYECTOS</div>
+      <h2 class="section-title">Nuestros <span class="accent">proyectos</span></h2>
+      <div class="events-timeline">
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">01</span>
+            <span class="event-month">ACM</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Proyecto" loading="lazy"/>
+            <div class="event-tag">Web</div>
+          </div>
+          <div class="event-body">
+            <h3>Sitio Web ACM</h3>
+            <p>Plataforma oficial del capítulo estudiantil construida con Astro + Three.js. Modelos 3D interactivos, boot screen estilo terminal y diseño cyberpunk.</p>
+            <div class="event-meta">
+              <span>🔧 Astro · Three.js</span>
+              <span>👥 Equipo ACM</span>
+            </div>
+            <a href="https://github.com/AngelSalasZapata/pagina-acm-ucsm" class="event-btn" target="_blank">Ver repositorio</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">02</span>
+            <span class="event-month">ACM</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="Proyecto" loading="lazy"/>
+            <div class="event-tag">Mobile</div>
+          </div>
+          <div class="event-body">
+            <h3>App ACM</h3>
+            <p>Aplicación móvil para estudiantes con eventos, horarios, foros y notificaciones en tiempo real.</p>
+            <div class="event-meta">
+              <span>🔧 React Native</span>
+              <span>📱 iOS / Android</span>
+            </div>
+            <a href="#" class="event-btn">Próximamente</a>
+          </div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-date-block">
+            <span class="event-day">03</span>
+            <span class="event-month">ACM</span>
+          </div>
+          <div class="event-img-wrap">
+            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80" alt="Proyecto" loading="lazy"/>
+            <div class="event-tag">Data</div>
+          </div>
+          <div class="event-body">
+            <h3>Dashboard ACM</h3>
+            <p>Panel de visualización de datos con métricas del capítulo, asistencia a eventos y estadísticas de membresía.</p>
+            <div class="event-meta">
+              <span>🔧 Python · React</span>
+              <span>📊 Dashboard</span>
+            </div>
+            <a href="#" class="event-btn">En desarrollo</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
