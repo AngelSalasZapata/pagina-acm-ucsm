@@ -83,13 +83,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const cards = document.querySelectorAll('.project-card');
 
   if (section && track) {
+    const title = track.querySelector('.projects-title');
+
+    function getStartX() {
+      if (!title) return 0;
+      return (window.innerWidth - title.offsetWidth) / 2 - 48;
+    }
+
     function getMaxX() { return Math.max(0, track.scrollWidth - window.innerWidth); }
 
     function updateTrack() {
       const rect = section.getBoundingClientRect();
       const sh = rect.height, vh = window.innerHeight;
       const progress = Math.max(0, Math.min(1, (vh - rect.top) / (sh - vh)));
-      track.style.transform = `translateX(${-progress * getMaxX()}px)`;
+      const centerOffset = getStartX();
+      const endX = -getMaxX();
+      track.style.transform = `translateX(${centerOffset + progress * (endX - centerOffset)}px)`;
       requestAnimationFrame(updateTrack);
     }
     requestAnimationFrame(updateTrack);
