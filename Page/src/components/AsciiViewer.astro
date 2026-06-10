@@ -16,7 +16,8 @@
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
     const glCtx = renderer.getContext();
     const maxRB = glCtx ? glCtx.getParameter(glCtx.MAX_RENDERBUFFER_SIZE) : 2048;
-    const pr = Math.max(1, Math.min(devicePixelRatio, 1.5, maxRB / (parent.clientWidth || 800)));
+    const initW = parent.clientWidth || 800;
+    const pr = Math.max(1, Math.min(devicePixelRatio, 1.5, maxRB / Math.max(initW, 1)));
     renderer.setPixelRatio(pr);
     renderer.setClearColor(0x000000, 0);
     console.log('[AsciiViewer] renderer ready, maxRB:', maxRB, 'pr:', pr);
@@ -92,6 +93,113 @@
     window.addEventListener('pointerup', () => { dragging = false; });
 
     const clock = new THREE.Clock();
+    let composer = null;
+
+    // attempt ASCII effect after model is settled
+    if (isSkull || isHeart) {
+      let fc = 0;
+      (function tryEffect() {
+        fc++;
+        if (fc < 12) { requestAnimationFrame(tryEffect); return; }
+        loadEffect();
+      })();
+    }
+
+    async function loadEffect() {
+      try {
+        const w = parent.clientWidth, h = parent.clientHeight;
+        if (!w || !h) { requestAnimationFrame(loadEffect); return; }
+
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+
+        const pp = await import('postprocessing');
+
+        const SYMBOLS = '.:-=+*#%@NMWB8$▓▒░';
+        const glyphTex = (() => {
+          const c = document.createElement('canvas');
+          c.width = 64 * SYMBOLS.length; c.height = 64;
+          const x = c.getContext('2d');
+          if (!x) return null;
+          x.fillStyle = '#000'; x.fillRect(0, 0, c.width, c.height);
+          x.fillStyle = '#fff'; x.font = '62px monospace';
+          x.textAlign = 'center'; x.textBaseline = 'middle';
+          for (let i = 0; i < SYMBOLS.length; i++) x.fillText(SYMBOLS[i], i * 64 + 32, 32);
+          const t = new THREE.CanvasTexture(c);
+          t.needsUpdate = true;
+          t.minFilter = t.magFilter = THREE.LinearFilter;
+          return t;
+        })();
+
+        const frag = `
+uniform float cellSize;
+uniform bool invert;
+uniform vec2 resolution;
+uniform sampler2D glyphAtlas;
+uniform float glyphTiles;
+uniform bool useGlyphAtlas;
+void mainImage(const in vec4 _,const in vec2 u,out vec4 o){
+  vec4 cl=texture(inputBuffer,u);
+  float br=dot(cl.rgb,vec3(.299,.587,.114));
+  if(br<0.04){o=vec4(0,0,0,0);return;}
+  vec2 lv=fract(u*resolution/cellSize);
+  float cv;
+  if(useGlyphAtlas&&glyphTiles>0.){
+    float ti=clamp(floor(br*glyphTiles),0.,glyphTiles-1.);
+    cv=texture(glyphAtlas,vec2((ti+0.02+lv.x*(1.-0.04))/glyphTiles,0.02+lv.y*(1.-0.04))).r;
+  } else {
+    float g=clamp((br-.1)*1.4,0.,1.);
+    cv=g;
+  }
+  vec3 fc=cl.rgb*cv;
+  o=vec4(fc,cl.a);
+}`;
+
+        class AsciiFX extends pp.Effect {
+          constructor() {
+            super('AsciiFX', frag, {
+              blendFunction: pp.BlendFunction.NORMAL,
+              uniforms: new Map([
+                ['cellSize', new THREE.Uniform(8)],
+                ['invert', new THREE.Uniform(false)],
+                ['resolution', new THREE.Uniform(new THREE.Vector2(renderer.domElement.width, renderer.domElement.height))],
+                ['glyphAtlas', new THREE.Uniform(glyphTex)],
+                ['glyphTiles', new THREE.Uniform(SYMBOLS.length)],
+                ['useGlyphAtlas', new THREE.Uniform(!!glyphTex)],
+              ])
+            });
+          }
+          update(_, __, dt) { }
+        }
+
+        const fx = new AsciiFX();
+        const resizeFX = () => {
+          const w2 = parent.clientWidth, h2 = parent.clientHeight;
+          if (!w2 || !h2) return;
+          renderer.setSize(w2, h2);
+          camera.aspect = w2 / h2;
+          camera.updateProjectionMatrix();
+          fx.uniforms.get('resolution').value.set(renderer.domElement.width, renderer.domElement.height);
+          if (composer) composer.setSize(renderer.domElement.width, renderer.domElement.height);
+        };
+        new ResizeObserver(resizeFX).observe(parent);
+        resizeFX();
+
+        const c = new pp.EffectComposer(renderer);
+        c.addPass(new pp.RenderPass(scene, camera));
+        const ep = new pp.EffectPass(camera, fx);
+        ep.renderToScreen = true;
+        c.addPass(ep);
+        resizeFX();
+
+        composer = c;
+        console.log('[AsciiViewer] ASCII effect active');
+      } catch (e) {
+        console.warn('[AsciiViewer] ASCII unavailable, raw render continues', e);
+      }
+    }
+
     (function loop() {
       requestAnimationFrame(loop);
       const dt = clock.getDelta();
@@ -103,7 +211,13 @@
       group.rotation.x = dy + 0.3;
       group.rotation.y = dx + rotY;
       group.rotation.z = -0.08;
-      renderer.render(scene, camera);
+      if (composer) {
+        renderer.setRenderTarget(null);
+        renderer.clear();
+        composer.render(dt);
+      } else {
+        renderer.render(scene, camera);
+      }
     })();
   }
 </script>
