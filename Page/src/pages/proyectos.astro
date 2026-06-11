@@ -1,74 +1,157 @@
 ---
-// src/pages/proyectos.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
+
 <BaseLayout title="Proyectos">
 
-  <section class="projects-hscroll" id="projects-hscroll">
+  <section class="projects-mural" id="projects-mural">
     <div class="projects-sticky">
-      <div class="projects-track">
-        <h2 class="projects-title">PROYECTOS ACM</h2>
+      <div class="mural-scroll" id="mural-scroll">
+        <div class="mural-wall" id="mural-wall">
 
-        <div class="project-card" data-index="0">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Web" loading="lazy"/>
-          </div>
-          <div class="card-body">
-            <span class="card-num">01</span>
-            <h3>Sitio Web ACM</h3>
-            <p>Plataforma oficial del capítulo con Astro + Three.js. Modelos 3D interactivos y boot screen estilo terminal.</p>
-            <div class="card-tags">
-              <span>Astro</span><span>Three.js</span><span>CSS</span>
+          <h2 class="mural-title" id="mural-title">PROYECTOS ACM</h2>
+
+          <div class="project-card" data-index="0">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Sitio Web ACM" loading="lazy" />
             </div>
-            <a href="https://github.com/AngelSalasZapata/pagina-acm-ucsm" target="_blank" class="card-link">Ver repositorio →</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-index="1">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="Mobile" loading="lazy"/>
-          </div>
-          <div class="card-body">
-            <span class="card-num">02</span>
-            <h3>App ACM</h3>
-            <p>Aplicación móvil con eventos, horarios, foros y notificaciones en tiempo real para estudiantes.</p>
-            <div class="card-tags">
-              <span>React Native</span><span>Firebase</span>
+            <div class="card-body">
+              <h3>Sitio Web ACM</h3>
+              <p>Plataforma oficial del capítulo con Astro + Three.js. Modelos 3D interactivos y boot screen estilo terminal.</p>
+              <div class="card-tags">
+                <span>Astro</span><span>Three.js</span><span>CSS</span>
+              </div>
+              <a href="https://github.com/AngelSalasZapata/pagina-acm-ucsm" target="_blank" class="card-link">Repositorio →</a>
             </div>
-            <a href="#" class="card-link">Próximamente →</a>
           </div>
-        </div>
 
-        <div class="project-card" data-index="2">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80" alt="Data" loading="lazy"/>
-          </div>
-          <div class="card-body">
-            <span class="card-num">03</span>
-            <h3>Dashboard ACM</h3>
-            <p>Panel de visualización con métricas del capítulo, asistencia a eventos y estadísticas de membresía.</p>
-            <div class="card-tags">
-              <span>Python</span><span>React</span><span>D3</span>
+          <div class="project-card" data-index="1">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="App ACM" loading="lazy" />
             </div>
-            <a href="#" class="card-link">En desarrollo →</a>
-          </div>
-        </div>
-
-        <div class="project-card" data-index="3">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1537432376144-e84978a2925d?w=600&q=80" alt="AI" loading="lazy"/>
-          </div>
-          <div class="card-body">
-            <span class="card-num">04</span>
-            <h3>ACM Bot</h3>
-            <p>Asistente virtual para resolver dudas sobre el capítulo, eventos, horarios y recursos académicos.</p>
-            <div class="card-tags">
-              <span>Python</span><span>LLM</span><span>Discord</span>
+            <div class="card-body">
+              <h3>App ACM</h3>
+              <p>Aplicación móvil con eventos, horarios, foros y notificaciones en tiempo real para estudiantes.</p>
+              <div class="card-tags">
+                <span>React Native</span><span>Firebase</span>
+              </div>
+              <a href="#" class="card-link">Próximamente →</a>
             </div>
-            <a href="#" class="card-link">En desarrollo →</a>
           </div>
-        </div>
 
+          <div class="project-card" data-index="2">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80" alt="Dashboard ACM" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>Dashboard ACM</h3>
+              <p>Panel de visualización con métricas del capítulo, asistencia a eventos y estadísticas de membresía.</p>
+              <div class="card-tags">
+                <span>Python</span><span>React</span><span>D3</span>
+              </div>
+              <a href="#" class="card-link">En desarrollo →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="3">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1537432376144-e84978a2925d?w=600&q=80" alt="ACM Bot" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM Bot</h3>
+              <p>Asistente virtual para resolver dudas sobre el capítulo, eventos, horarios y recursos académicos.</p>
+              <div class="card-tags">
+                <span>Python</span><span>LLM</span><span>Discord</span>
+              </div>
+              <a href="#" class="card-link">En desarrollo →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="4">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&q=80" alt="ACM CLI" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM CLI</h3>
+              <p>Herramientas de línea de comandos para gestionar membresías, eventos y automatizar tareas del capítulo.</p>
+              <div class="card-tags">
+                <span>Go</span><span>Cobra</span><span>Terminal</span>
+              </div>
+              <a href="#" class="card-link">Explorar →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="5">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="ACM Learn" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM Learn</h3>
+              <p>Plataforma de aprendizaje colaborativo con cursos, talleres interactivos y rutas de estudio.</p>
+              <div class="card-tags">
+                <span>Next.js</span><span>MongoDB</span><span>WebSockets</span>
+              </div>
+              <a href="#" class="card-link">Explorar →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="6">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80" alt="ACM API" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM API</h3>
+              <p>Backend unificado de servicios REST y GraphQL para todas las plataformas del capítulo ACM.</p>
+              <div class="card-tags">
+                <span>Node.js</span><span>GraphQL</span><span>PostgreSQL</span>
+              </div>
+              <a href="#" class="card-link">Explorar →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="7">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80" alt="ACM Design" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM Design</h3>
+              <p>Sistema de diseño y componentes reutilizables para mantener consistencia visual en todos los proyectos.</p>
+              <div class="card-tags">
+                <span>React</span><span>Storybook</span><span>Figma</span>
+              </div>
+              <a href="#" class="card-link">Explorar →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="8">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1556438064-2d76447b76f0?w=600&q=80" alt="ACM Games" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM Games</h3>
+              <p>Juegos educativos interactivos para aprender programación y algoritmos de forma divertida.</p>
+              <div class="card-tags">
+                <span>Phaser</span><span>TypeScript</span><span>Canvas</span>
+              </div>
+              <a href="#" class="card-link">Jugar →</a>
+            </div>
+          </div>
+
+          <div class="project-card" data-index="9">
+            <div class="card-img">
+              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80" alt="ACM Blog" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>ACM Blog</h3>
+              <p>Blog del capítulo con artículos técnicos, tutoriales y experiencias de miembros de la comunidad.</p>
+              <div class="card-tags">
+                <span>Astro</span><span>MDX</span><span>RSS</span>
+              </div>
+              <a href="#" class="card-link">Leer →</a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -76,47 +159,191 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-  import { scroll, animate } from 'motion';
-
-  const section = document.getElementById('projects-hscroll');
-  const track = document.querySelector('.projects-track');
+  const section = document.getElementById('projects-mural');
+  const muralScroll = document.getElementById('mural-scroll');
+  const wall = document.getElementById('mural-wall');
+  const title = document.getElementById('mural-title');
   const cards = document.querySelectorAll('.project-card');
 
-  if (section && track) {
-    function getStartX() { return window.innerWidth * 0.15; }
+  if (section && muralScroll && wall && cards.length) {
 
-    function getMaxX() { return Math.max(0, track.scrollWidth - window.innerWidth); }
+    function measureTitle() {
+      const origLeft = title.style.left;
+      const origTop = title.style.top;
+      const origVis = title.style.visibility;
+      title.style.left = '0px';
+      title.style.top = '0px';
+      title.style.visibility = 'hidden';
+      const w = title.offsetWidth;
+      title.style.left = origLeft;
+      title.style.top = origTop;
+      title.style.visibility = origVis;
+      return w;
+    }
 
-    let rafId;
-    function updateTrack() {
+    function layoutMural() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const PAD = 80;
+
+      const titleW = measureTitle();
+      const titleX = Math.max(PAD, (vw - titleW) / 2);
+      const titleY = (vh / 2) - 60;
+      title.style.left = titleX + 'px';
+      title.style.top = titleY + 'px';
+      title.style.transform = 'none';
+
+      const titleRight = titleX + titleW + 120;
+
+      const spreadX = 1800;
+      const yPad = 60;
+      const placed = [];
+
+      function overlaps(x, y, w, h) {
+        const gap = 8;
+        for (const p of placed) {
+          if (x < p.x + p.w + gap && x + w + gap > p.x &&
+              y < p.y + p.h + gap && y + h + gap > p.y) return true;
+        }
+        return false;
+      }
+
+      let maxRight = 0;
+
+      cards.forEach((card, i) => {
+        let w, h, x, y, rot, z;
+
+        if (i === 0) {
+          w = 200;
+          h = 270;
+          x = titleRight + 280;
+          y = yPad + 15;
+          rot = 0;
+          z = 11;
+        } else if (i === 1) {
+          w = 260;
+          h = 340;
+          x = titleRight + 160;
+          y = yPad + 400;
+          rot = 5;
+          z = 11;
+        } else if (i === 2) {
+          w = 540;
+          h = 540;
+          x = titleRight + 550;
+          y = (vh - 540) / 2;
+          rot = 0;
+          z = 9;
+        } else {
+          const roll = Math.random();
+          if (roll < 0.2) {
+            w = 160 + Math.random() * 50;
+          } else if (roll < 0.6) {
+            w = 250 + Math.random() * 60;
+          } else if (roll < 0.85) {
+            w = 340 + Math.random() * 50;
+          } else {
+            w = 420 + Math.random() * 70;
+          }
+          w = Math.round(w);
+
+          const aspect = 0.7 + Math.random() * 0.25;
+          h = Math.round(w / aspect);
+
+          const step = spreadX / cards.length;
+          const zoneStart = titleRight + i * step;
+          const zoneEnd = titleRight + (i + 0.8) * step - w;
+
+          let attempts = 0;
+          do {
+            x = zoneStart + Math.random() * Math.max(1, zoneEnd - zoneStart);
+            const centerY = (vh - h) / 2;
+            const spread = (vh - 2 * yPad - h) * 0.45;
+            y = centerY + (Math.random() - 0.5) * spread;
+            y = Math.max(yPad, Math.min(vh - yPad - h, y));
+            attempts++;
+          } while (overlaps(x, y, w, h) && attempts < 40);
+
+          const sizeRatio = 1 - (w - 160) / 330;
+          const maxRot = 4 + sizeRatio * 14;
+          rot = (Math.random() - 0.5) * maxRot * 2;
+          z = Math.floor(Math.random() * 20) + 1;
+        }
+
+        placed.push({ x, y, w, h });
+        maxRight = Math.max(maxRight, x + w);
+
+        card.style.left = x + 'px';
+        card.style.top = y + 'px';
+        card.style.width = w + 'px';
+        card.style.zIndex = z;
+        card.style.rotate = rot + 'deg';
+      });
+
+      const muralWidth = Math.max(maxRight + PAD, vw + 100);
+      wall.style.width = muralWidth + 'px';
+      wall.style.height = '100vh';
+
+      const maxX = Math.max(0, muralWidth - vw);
+
+      cards.forEach(card => {
+        const cardX = parseFloat(card.style.left);
+        const cardW = parseFloat(card.style.width);
+        const rawStart = maxX > 0 ? (cardX - vw + cardW * 0.3) / maxX : 0;
+        const start = Math.max(0, Math.min(rawStart, 0.5));
+        const end = Math.min(1, start + 0.5);
+        card.dataset.animStart = start;
+        card.dataset.animEnd = end;
+      });
+
+      return muralWidth;
+    }
+
+    let muralWidth = layoutMural();
+
+    function getMaxX() {
+      return Math.max(0, muralWidth - window.innerWidth);
+    }
+
+    function updateScroll() {
       const rect = section.getBoundingClientRect();
-      const sh = rect.height, vh = window.innerHeight;
+      const sh = section.offsetHeight;
+      const vh = window.innerHeight;
       const totalScroll = sh - vh;
-      if (totalScroll <= 0) { rafId = requestAnimationFrame(updateTrack); return; }
+      if (totalScroll <= 0) return;
       const scrolled = Math.max(0, Math.min(totalScroll, -rect.top));
       const progress = scrolled / totalScroll;
-      const startX = getStartX();
-      const endX = -getMaxX();
-      track.style.transform = `translateX(${startX + progress * (endX - startX)}px)`;
-      rafId = requestAnimationFrame(updateTrack);
+      muralScroll.style.transform = `translateX(${-progress * getMaxX()}px)`;
+
+      cards.forEach(card => {
+        const start = parseFloat(card.dataset.animStart) || 0;
+        const end = parseFloat(card.dataset.animEnd) || 0.1;
+        const range = end - start;
+        let p;
+        if (range <= 0) {
+          p = progress >= start ? 1 : 0;
+        } else {
+          p = Math.max(0, Math.min(1, (progress - start) / range));
+        }
+        const ease = 1 - Math.pow(1 - p, 4);
+        card.style.opacity = ease;
+        card.style.transform = `translateX(${550 - 550 * ease}px) rotate(${12 - 12 * ease}deg)`;
+      });
     }
 
-    function recalcAndRestart() {
-      if (rafId) cancelAnimationFrame(rafId);
-      updateTrack();
-    }
-
-    document.fonts.ready.then(recalcAndRestart);
-    window.addEventListener('resize', recalcAndRestart);
-    requestAnimationFrame(updateTrack);
-
-    cards.forEach((card, i) => {
-      const s = 0.05 + i * 0.22;
-      scroll(
-        animate(card, { x: [80, 0], opacity: [0, 1] }),
-        { target: section, offset: [s, s + 0.18] }
-      );
+    document.fonts.ready.then(() => {
+      muralWidth = layoutMural();
+      updateScroll();
     });
+
+    window.addEventListener('scroll', updateScroll, { passive: true });
+
+    window.addEventListener('resize', () => {
+      muralWidth = layoutMural();
+      updateScroll();
+    });
+
+    requestAnimationFrame(updateScroll);
   }
 </script>
 
@@ -127,7 +354,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-display: swap;
   }
 
-  .projects-hscroll {
+  .projects-mural {
     position: relative;
     height: 300vh;
   }
@@ -137,104 +364,154 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     top: 0;
     height: 100vh;
     overflow: hidden;
-    display: flex;
-    align-items: center;
+    background: var(--bg);
   }
 
-  .projects-track {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    padding: 0 0 0 48px;
+  .mural-scroll {
+    height: 100%;
     will-change: transform;
   }
 
-  .projects-title {
+  .mural-wall {
+    position: relative;
+  }
+
+  .mural-title {
+    position: absolute;
     font-family: 'Nulshock', sans-serif;
-    font-size: clamp(3rem, 5vw, 5rem);
+    font-size: clamp(2.5rem, 5vw, 5rem);
     color: var(--green);
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-right: 48px;
     letter-spacing: 0.05em;
+    z-index: 50;
+    text-shadow: 0 0 20px var(--green-glow), 0 0 60px rgba(0, 230, 118, 0.15);
+    pointer-events: none;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .project-card {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    width: 360px;
-    flex-shrink: 0;
-    background: rgba(255,255,255,0.03);
+    background: rgba(13, 20, 13, 0.95);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 6px;
     overflow: hidden;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    cursor: default;
+    opacity: 0;
     will-change: transform, opacity;
+  }
+
+  .project-card:hover {
+    scale: 1.05;
+    box-shadow:
+      0 4px 16px rgba(0, 230, 118, 0.15),
+      0 12px 48px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    z-index: 100 !important;
   }
 
   .card-img {
     width: 100%;
-    height: 180px;
+    height: 140px;
     overflow: hidden;
+    flex-shrink: 0;
   }
+
   .card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
   .card-body {
-    padding: 24px;
+    padding: 14px 16px 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-  }
-
-  .card-num {
-    font-family: 'Nulshock', sans-serif;
-    font-size: 1.25rem;
-    color: var(--green);
-    opacity: 0.6;
+    gap: 6px;
+    flex: 1;
   }
 
   .card-body h3 {
     font-family: 'Syne', sans-serif;
-    font-size: 1.35rem;
+    font-size: 1rem;
     color: #f6f4f3;
     margin: 0;
+    line-height: 1.2;
   }
 
   .card-body p {
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: rgba(246,244,243,0.7);
-    line-height: 1.5;
+    font-size: 0.72rem;
+    color: rgba(246, 244, 243, 0.65);
+    line-height: 1.4;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .card-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
+    gap: 4px;
+    margin-top: 2px;
   }
+
   .card-tags span {
     font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    padding: 2px 8px;
+    font-size: 0.6rem;
+    padding: 2px 6px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 3px;
     color: var(--green);
+    letter-spacing: -0.01em;
   }
 
   .card-link {
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--green);
     text-decoration: none;
-    margin-top: 8px;
+    margin-top: 4px;
     transition: opacity 0.2s;
+    opacity: 0.8;
   }
+
   .card-link:hover {
-    opacity: 0.7;
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .project-card {
+      width: 200px !important;
+    }
+
+    .card-img {
+      height: 100px;
+    }
+
+    .card-body h3 {
+      font-size: 0.85rem;
+    }
+
+    .card-body p {
+      font-size: 0.65rem;
+      -webkit-line-clamp: 2;
+    }
+
+    .card-tags span {
+      font-size: 0.55rem;
+    }
+
+    .mural-title {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+    }
   }
 </style>
