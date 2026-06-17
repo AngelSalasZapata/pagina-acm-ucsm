@@ -1,0 +1,232 @@
+@font-face {
+  font-family: 'Nulshock';
+  src: url('/fonts/Nulshock Bd.otf') format('opentype');
+  font-display: swap;
+}
+
+.projects-mural {
+  position: relative;
+  height: 300vh;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.projects-mural.visible {
+  opacity: 1;
+}
+
+.projects-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+}
+
+.mural-scroll {
+  height: 100%;
+  will-change: transform;
+}
+
+.mural-wall {
+  position: relative;
+}
+
+.mural-title {
+  position: absolute;
+  font-family: 'Nulshock', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  color: var(--green);
+  letter-spacing: 0.05em;
+  z-index: 50;
+  text-shadow: 0 0 20px var(--green-glow), 0 0 60px rgba(0, 230, 118, 0.15);
+  pointer-events: none;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ===== INTRO OVERLAY ===== */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ===== INTRO CARDS (terminal stacking / espiral) ===== */
+.intro-card {
+  position: absolute;
+  border-radius: 8px;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid rgba(0, 230, 118, 0.1);
+  box-shadow:
+    0 0 30px rgba(0, 230, 118, 0.12),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: none;
+  pointer-events: none;
+}
+
+.intro-card.show {
+  animation: cardPop 0.03s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes cardPop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+
+/* ===== INTRO TITLE (scramble cyberpunk) ===== */
+.intro-title {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.intro-title.show {
+  opacity: 1;
+}
+
+.scramble-text {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.03em;
+  font-family: 'Nulshock', sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  color: var(--green);
+  letter-spacing: 0.05em;
+}
+
+.scramble-text span {
+  display: inline-block;
+  min-width: 0.55em;
+  text-align: center;
+  will-change: transform, opacity;
+}
+
+.scramble-text.complete span {
+  text-shadow:
+    0 0 15px var(--green-glow),
+    0 0 40px rgba(0, 230, 118, 0.35),
+    0 0 80px rgba(0, 230, 118, 0.15);
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+
+.scramble-text.complete span:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 15px var(--green-glow),
+      0 0 40px rgba(0, 230, 118, 0.35),
+      0 0 80px rgba(0, 230, 118, 0.15);
+  }
+  50% {
+    text-shadow:
+      0 0 25px var(--green-glow),
+      0 0 60px rgba(0, 230, 118, 0.5),
+      0 0 120px rgba(0, 230, 118, 0.25);
+  }
+}
+
+/* ===== SCANLINES ===== */
+.intro-scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 230, 118, 0.025) 2px,
+      rgba(0, 230, 118, 0.025) 4px
+    );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.intro-scanlines.show {
+  opacity: 1;
+}
+
+.intro-scanlines.active {
+  animation: scanMove 0.12s linear infinite;
+}
+
+@keyframes scanMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .projects-mural {
+    height: auto;
+    opacity: 1;
+  }
+
+  .projects-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .mural-wall {
+    width: 100% !important;
+    height: auto !important;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0 12px 100px;
+  }
+
+  .mural-scroll {
+    transform: none !important;
+    height: auto !important;
+  }
+
+  .mural-title {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    white-space: normal;
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .scramble-text {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .project-card {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    rotate: none !important;
+    z-index: auto !important;
+  }
+
+  .project-card:hover {
+    scale: 1.02;
+  }
+}

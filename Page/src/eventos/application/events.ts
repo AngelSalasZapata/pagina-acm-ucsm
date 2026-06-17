@@ -1,0 +1,73 @@
+import type { Event } from '../domain/event';
+
+const events: Event[] = [
+  {
+    id: 'hackacm-2025',
+    day: '12',
+    month: 'ABR 2025',
+    title: 'HackACM 2025',
+    description: 'Nuestro hackathon anual de 24 horas. Equipos de hasta 4 personas compitiendo por premios en categorías de IA, sostenibilidad y salud digital.',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80',
+    tag: 'Hackathon',
+    location: 'Auditorio Principal',
+    duration: '24h',
+    capacity: 'Equipos de 4',
+    buttonText: 'Registrarse',
+  },
+  {
+    id: 'intro-ml',
+    day: '24',
+    month: 'ABR 2025',
+    title: 'Introducción a Machine Learning',
+    description: 'Aprende los fundamentos de ML con Python y scikit-learn. Taller práctico con datasets reales y casos de uso de la industria.',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80',
+    tag: 'Taller',
+    location: 'Lab de Cómputo 3',
+    duration: '3h',
+    capacity: '30 cupos',
+    buttonText: 'Registrarse',
+  },
+  {
+    id: 'tech-talk-ciberseguridad',
+    day: '08',
+    month: 'MAY 2025',
+    title: 'Tech Talk: Ciberseguridad en 2025',
+    description: 'Especialista en seguridad informática de una firma multinacional comparte las tendencias, amenazas y oportunidades del sector.',
+    image: 'https://images.unsplash.com/photo-1558346547-4439467bd1d5?w=600&q=80',
+    tag: 'Keynote',
+    location: 'Sala de Conferencias B',
+    duration: '2h',
+    capacity: 'Abierto',
+    buttonText: 'Ver detalles',
+  },
+  {
+    id: 'fullstack-workshop',
+    day: '20',
+    month: 'MAY 2025',
+    title: 'Desarrollo Web Full Stack',
+    description: 'Workshop intensivo de React + Node.js + bases de datos. Construirás una aplicación completa desde cero con guía de mentores.',
+    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80',
+    tag: 'Workshop',
+    location: 'Lab de Innovación',
+    duration: '6h',
+    capacity: '20 cupos',
+    buttonText: 'Registrarse',
+  },
+  {
+    id: 'acm-connect',
+    day: '05',
+    month: 'JUN 2025',
+    title: 'ACM Connect: Empresas & Estudiantes',
+    description: 'Feria de conexiones profesionales con representantes de empresas tech. Trae tu CV y prepárate para presentarte en 60 segundos.',
+    image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80',
+    tag: 'Networking',
+    location: 'Hall Universitario',
+    duration: '4h',
+    capacity: 'Abierto',
+    buttonText: 'Ver detalles',
+  },
+];
+
+export function getEvents(): Event[] {
+  return events;
+}

@@ -1,0 +1,104 @@
+---
+import type { Project } from '../../../domain/project';
+
+export interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="masonry-card" data-tags={project.tags.join(',')} data-title={project.title.toLowerCase()} data-area={project.area.toLowerCase()} data-date={project.updatedAt}>
+  <div class="masonry-card-img">
+    <img src={project.image} alt={project.title} loading="lazy" />
+  </div>
+  <div class="masonry-card-body">
+    <h3>{project.title}</h3>
+    <div class="masonry-card-tags">
+      {project.tags.map(tag => <span>{tag}</span>)}
+    </div>
+  </div>
+</div>
+
+<style>
+  .masonry-card {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(13, 20, 13, 0.5);
+    border: 1px solid rgba(0, 230, 118, 0.08);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+  }
+
+  .masonry-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 230, 118, 0.25);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .masonry-card-img {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .masonry-card-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .masonry-card:hover .masonry-card-img img {
+    transform: scale(1.03);
+  }
+
+  .masonry-card-body {
+    padding: 10px 12px 12px;
+  }
+
+  .masonry-card-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(246, 244, 243, 0.9);
+    margin: 0 0 6px;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  .masonry-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .masonry-card-tags span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    padding: 2px 6px;
+    border: 1px solid rgba(0, 230, 118, 0.12);
+    border-radius: 4px;
+    color: rgba(0, 230, 118, 0.65);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 768px) {
+    .masonry-card {
+      margin-bottom: 12px;
+    }
+
+    .masonry-card-body {
+      padding: 8px 10px 10px;
+    }
+
+    .masonry-card-body h3 {
+      font-size: 0.72rem;
+    }
+
+    .masonry-card-tags span {
+      font-size: 0.45rem;
+    }
+  }
+</style>

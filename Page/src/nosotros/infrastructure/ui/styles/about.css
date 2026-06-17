@@ -1,0 +1,105 @@
+.about {
+  background: rgba(13, 20, 13, 0.65);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.about-text strong { color: var(--green); }
+
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  background: var(--green-muted);
+  transition: all var(--transition);
+}
+
+.badge:hover {
+  background: var(--green);
+  color: var(--bg);
+  border-color: var(--green);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--green);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 20px; height: 20px;
+  border-right: 1px solid var(--green);
+  border-bottom: 1px solid var(--green);
+}
+
+.stat-card:hover { border-color: var(--green); }
+
+.stat-num-big {
+  font-family: 'Orbitron', 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--green);
+  text-shadow: 0 0 20px rgba(0, 230, 118, 0.5);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-label-card {
+  font-family: 'Share Tech Mono', 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 480px) {
+  .stat-grid { grid-template-columns: 1fr; }
+}
