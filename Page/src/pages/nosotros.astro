@@ -1,767 +1,569 @@
 ---
-// src/pages/nosotros.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { stats, badges } from '../nosotros/application/nosotros';
+import '../nosotros/infrastructure/ui/styles/dragCards.css';
 const base = import.meta.env.BASE_URL;
 ---
+
 <BaseLayout title="Nosotros">
 
-    <!-- ABOUT -->
-  <section class="about section" id="about">
-    <div class="container">
-      <div class="section-label">// 01. QUIÉNES SOMOS</div>
-      <div class="about-grid">
-        <div class="about-text">
-          <h2 class="section-title">Impulsando el futuro <span class="accent">tecnológico</span> del Perú</h2>
-          <p>Somos el capítulo estudiantil de la <strong>Association for Computing Machinery (ACM)</strong> de la Universidad Católica de Santa María, una comunidad de estudiantes apasionados por la ingeniería, ciencias, el desarrollo de software y la innovación tecnológica.</p>
-          <p>Fundado para conectar a estudiantes con recursos académicos de clase mundial, organizamos talleres, hackathons, charlas con la industria y proyectos colaborativos que potencian las habilidades técnicas y profesionales de nuestros miembros.</p>
-          <div class="about-badges">
-            <span class="badge">Programación</span>
-            <span class="badge">IA &amp; ML</span>
-            <span class="badge">Ciberseguridad</span>
-            <span class="badge">Open Source</span>
-            <span class="badge">Redes</span>
-            <span class="badge">Robótica</span>
-            <span class="badge">Computación Cuántica</span>
-          </div>
-        </div>
-        <div class="stat-grid">
-          <div class="stat-card">
-            <div class="stat-num-big">120+</div>
-            <div class="stat-label-card">MIEMBROS ACTIVOS</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num-big">1°</div>
-            <div class="stat-label-card">AÑO INICIANDO</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num-big">40+</div>
-            <div class="stat-label-card">EVENTOS AL AÑO</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num-big">8</div>
-            <div class="stat-label-card">PROYECTOS ACTIVOS</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="nosotros-section" id="nosotros-section">
 
-  <!-- ── SCROLL REVEAL SECTION ── -->
-  <section class="scroll-reveal" id="scroll-reveal">
-    <div class="separator-bar" id="separator-bar"></div>
+    <button class="grid-back-btn" id="grid1-back">←</button>
 
-    <div class="reveal-stage" id="reveal-stage">
-      <div class="reveal-purple" id="reveal-purple">
-        <div class="content-inner">
-          <h2 class="section-title">Team</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
+    <div class="nosotros-grid" id="nosotros-grid">
+
+      <!-- Grid 1: ACM / Datos -->
+      <div class="grid-item" style="--grid-color:#28bca9" data-grid="1">
+        <div class="grid-front">
+          <h2 class="grid-title">ACM</h2>
+          <p class="grid-sub">Datos</p>
         </div>
-      </div>
-
-      <div class="reveal-green" id="reveal-green">
-        <div class="content-inner">
-          <h2 class="section-title">Christian</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
-        </div>
-      </div>
-
-      <div class="reveal-blue" id="reveal-blue">
-        <div class="content-inner">
-          <h2 class="section-title">Fernando</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
-        </div>
-      </div>
-
-      <div class="reveal-red" id="reveal-red">
-        <div class="content-inner">
-          <h2 class="section-title">Santiago</h2>
-          <p>El futuro es ahora. Nuevos desafíos, nuevas oportunidades y un camino de transformación y evolución constante.</p>
-        </div>
-      </div>
-
-      <div class="reveal-content" id="reveal-white">
-        <div class="reveal-cards">
-          <div class="drag-card" data-left="5" data-top="8">
-            <div class="card-role">Nickname</div>
-            <div class="card-nick">_AR3LYX1</div>
-            <img class="hongo-gif" src="/hongo.gif" alt="" draggable="false" />
-          </div>
-          <div class="drag-card is-square" data-left="55" data-top="8">
-            <img class="folder-git-img" src="/folderGit.png" alt="" draggable="false" />
-          </div>
-          <div class="drag-card is-square" data-left="5" data-top="56">
-            <div class="card-role">ig</div>
-          </div>
-          <div class="drag-card" data-left="55" data-top="56">
-            <div class="card-role">otros</div>
-          </div>
-          <div class="drag-card card-frame" data-left="28" data-top="24">
-            <div class="frame-wrap">
-              <img class="frame-bg" src="/arelyx.jpg" alt="" draggable="false" />
-              <img class="frame-fg" src="/frame1.gif" alt="" draggable="false" />
+        <div class="grid-back">
+          <div class="grid-back-content">
+            <h2 class="back-heading">Impulsando el futuro <span style="color:#fff">tecnológico</span> del Perú</h2>
+            <p class="back-desc">Somos el capítulo estudiantil de la <strong>Association for Computing Machinery (ACM)</strong> de la Universidad Católica de Santa María, una comunidad de estudiantes apasionados por la ingeniería, ciencias, el desarrollo de software y la innovación tecnológica.</p>
+            <p class="back-desc">Fundado para conectar a estudiantes con recursos académicos de clase mundial, organizamos talleres, hackathons, charlas con la industria y proyectos colaborativos que potencian las habilidades técnicas y profesionales de nuestros miembros.</p>
+            <div class="back-badges">
+              {badges.map(b => <span class="back-badge">{b}</span>)}
+            </div>
+            <div class="back-stats">
+              {stats.map(s => (
+                <div class="back-stat">
+                  <span class="back-stat-num">{s.value}</span>
+                  <span class="back-stat-label">{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
-          <div class="drag-card is-square" data-left="75" data-top="56">
-            <img class="raver-gif" src="/raver.gif" alt="" draggable="false" />
-          </div>
-          <div class="drag-card is-square" data-left="75" data-top="30">
-            <img class="rei-gif" src="/rei.gif" alt="" draggable="false" />
-          </div>
-<div class="drag-card github-streak-card" id="github-modal" data-left="40" data-top="30" style="display: none; z-index: 100; min-width:320px; max-width:90vw;">
-  <div class="github-modal-window">
-    <div class="win-titlebar">
-      <span class="win-title">GitHub Streak</span>
-      <button class="win-close" id="github-streak-close" style="position:absolute;top:0;right:0;width:32px;height:32px;line-height:32px;background:#c0c0c0;border:2px solid #808080;box-shadow:0 2px 4px #2228;z-index:9999;font-size:20px;cursor:pointer;pointer-events:auto;">✕</button>
-    </div>
-    <div class="win-body">
-      <img src="https://streak-stats.demolab.com?user=ArelyX1&theme=radical&hide_border=true&exclude_days=Sun%2CTue%2CFri" alt="GitHub Streak" />
-    </div>
-  </div>
-</div>
         </div>
-        <div class="content-inner">
-          <h2 class="section-title" style="font-family:'VT323',monospace;color:#cae4c5;font-size:clamp(6rem,12vw,9rem);margin-bottom:4px"><span style="position:relative;display:inline-block">Andry<img class="comme-img" src="/comme.png" alt="" draggable="false" /></span></h2>
-          <div class="presidente-border-wrap">
-            <svg class="presidente-border-svg">
-              <rect fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="6" stroke-dasharray="16 12" />
-            </svg>
-            <p class="presidente-text" style="font-family:'VT323',monospace;color:#fff;font-size:clamp(2.2rem,4.5vw,3rem);background:#000;padding:0 14px;display:inline-block;margin:0;line-height:1.2">Presidente</p>
+      </div>
+
+      <!-- Grid 2: Directiva Ejecutiva -->
+      <div class="grid-item" style="--grid-color:#fb4673" data-grid="2">
+        <div class="grid-front">
+          <h2 class="grid-title">Directiva<br>Ejecutiva</h2>
+        </div>
+        <div class="grid-list" id="grid-list">
+          <div class="directive-entry" data-member="chair">
+            <span class="de-var">chair</span><span class="de-op">_&gt;</span><span class="de-val">Andry Caceres</span>
+          </div>
+          <div class="directive-entry" data-member="vice-chair">
+            <span class="de-var">vice-chair</span><span class="de-op">_&gt;</span><span class="de-val">Santiago Cusirramos</span>
+          </div>
+          <div class="directive-entry" data-member="treasurer">
+            <span class="de-var">treasurer</span><span class="de-op">_&gt;</span><span class="de-val">Fernando Pacheco</span>
+          </div>
+          <div class="directive-entry" data-member="sponsor">
+            <span class="de-var">sponsor</span><span class="de-op">_&gt;</span><span class="de-val">Christian Revilla</span>
           </div>
         </div>
       </div>
 
+      <!-- Grid 3: Directiva de Proyectos -->
+      <div class="grid-item" style="--grid-color:#99cccc" data-grid="3">
+        <div class="grid-front">
+          <h2 class="grid-title">Directiva<br>de Proyectos</h2>
+        </div>
+      </div>
+
+      <!-- Grid 4: Marketing y Comunicación -->
+      <div class="grid-item" style="--grid-color:#223634" data-grid="4">
+        <div class="grid-front">
+          <h2 class="grid-title">Marketing y<br>Comunicación</h2>
+        </div>
+      </div>
+
+      <!-- Grid 5: Logística y RR.PP. -->
+      <div class="grid-item" style="--grid-color:#ff9900" data-grid="5">
+        <div class="grid-front">
+          <h2 class="grid-title">Logística y<br>Relaciones Públicas</h2>
+        </div>
+      </div>
+
+      <!-- Grid 6: Dev Team -->
+      <div class="grid-item" style="--grid-color:#00cc99" data-grid="6">
+        <div class="grid-front">
+          <h2 class="grid-title">Dev Team</h2>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Chair overlay (column 3) -->
+    <div class="chair-overlay" id="chair-overlay">
+      <button class="chair-close" id="chair-close">✕</button>
+      <div class="reveal-cards" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+        <div class="drag-card" data-left="5" data-top="8">
+          <div class="card-role">Nickname</div>
+          <div class="card-nick">_AR3LYX1</div>
+          <img class="hongo-gif" src="/hongo.gif" alt="" draggable="false" />
+        </div>
+        <div class="drag-card is-square folder-card" data-left="55" data-top="8">
+          <img class="folder-git-img" src="/folderGit.png" alt="" draggable="false" />
+          <div class="folder-label">Click The Folder</div>
+        </div>
+        <div class="drag-card card-email" data-left="55" data-top="56">
+          <div class="email-content">
+            <span class="email-text">andry.caceres@estudiante.ucsm.edu.pe</span>
+            <img class="email-gif" src="/email.gif" alt="" draggable="false" />
+          </div>
+        </div>
+        <div class="drag-card card-frame" data-left="28" data-top="24">
+          <div class="frame-wrap">
+            <img class="frame-bg" src="/arelyx.jpg" alt="" draggable="false" />
+            <img class="frame-fg" src="/frame1.gif" alt="" draggable="false" />
+          </div>
+        </div>
+        <div class="drag-card is-square" data-left="75" data-top="56">
+          <img class="raver-gif" src="/raver.gif" alt="" draggable="false" />
+        </div>
+        <div class="drag-card is-square" data-left="75" data-top="30">
+          <img class="rei-gif" src="/rei.gif" alt="" draggable="false" />
+        </div>
+        <div class="drag-card github-streak-card" id="github-modal" data-left="40" data-top="30" style="display:none;z-index:100;min-width:320px;max-width:90vw">
+          <div class="github-modal-window">
+            <div class="win-titlebar">
+              <span class="win-icon"><img src="/folderGit.png" alt="" style="width:16px;height:16px;image-rendering:pixelated;vertical-align:middle;margin-right:4px" /></span>
+              <span class="win-title">GitHub Streak</span>
+              <button class="win-close" id="github-streak-close">✕</button>
+            </div>
+            <div class="win-body">
+              <img src="https://streak-stats.demolab.com?user=ArelyX1&theme=radical&hide_border=true&exclude_days=Sun%2CTue%2CFri" alt="GitHub Streak" />
+            </div>
+          </div>
+        </div>
+        <div class="drag-card instagram-modal-card" id="instagram-modal" data-left="35" data-top="15" style="display:none;z-index:100;min-width:380px;max-width:600px;width:540px">
+          <div class="github-modal-window">
+            <div class="win-titlebar">
+              <span class="win-icon"><img src="/email.gif" alt="" style="width:16px;height:16px;image-rendering:pixelated;vertical-align:middle;margin-right:4px" /></span>
+              <span class="win-title">Instagram</span>
+              <button class="win-close" id="instagram-modal-close">✕</button>
+            </div>
+            <div class="win-body" style="padding:0">
+              <iframe src="https://www.instagram.com/p/DXYXXUhDVDs/embed" width="100%" height="640" frameborder="0" scrolling="no" allowtransparency="true" style="border:none;overflow:hidden;display:block"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
-  <script type="module" src={base + "src/scripts/nosotros.js"}></script>
 </BaseLayout>
 
 <style>
-  .scroll-reveal {
+  .nosotros-section {
     position: relative;
-    background: rgba(13, 20, 13, 0.65);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 0;
-    min-height: 3000vh;
-  }
-
-  .separator-bar {
-    width: 100%;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    color: var(--green);
-    letter-spacing: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border);
-    user-select: none;
-  }
-
-  .reveal-stage {
-    position: sticky;
-    top: 0;
-    width: 100%;
     height: 100vh;
+    padding-top: 60px;
     overflow: hidden;
   }
 
-  .reveal-purple {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    background: #660099;
-    opacity: 0;
-    will-change: opacity;
-  }
-
-  .reveal-purple .section-title { color: #fff; }
-  .reveal-purple .accent5 { color: #ffcc00; }
-  .reveal-purple p { color: #ecc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
-
-  .reveal-green {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    background: #006600;
-    opacity: 0;
-    will-change: opacity;
-  }
-
-  .reveal-green .section-title { color: #fff; }
-  .reveal-green .accent4 { color: #ffcc00; }
-  .reveal-green p { color: #cfc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
-
-  .reveal-blue {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    background: #0033cc;
-    opacity: 0;
-    will-change: opacity;
-  }
-
-  .reveal-blue .section-title { color: #fff; }
-  .reveal-blue .accent3 { color: #ffcc00; }
-  .reveal-blue p { color: #ccf; font-size: 16px; line-height: 1.8; margin-top: 20px; }
-
-  .reveal-red {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4;
-    background: #cc0000;
-    opacity: 0;
-    will-change: opacity, clip-path;
-  }
-
-  .reveal-red .section-title { color: #fff; }
-  .reveal-red .accent2 { color: #ffcc00; }
-  .reveal-red p { color: #fcc; font-size: 16px; line-height: 1.8; margin-top: 20px; }
-
-  .reveal-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    background: #fff;
-    background-image: url('/backAre.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    will-change: clip-path;
-  }
-
-  .content-inner {
-    max-width: 720px;
-    padding: 40px 24px;
-    text-align: center;
-    color: #111;
-    position: relative;
-  }
-
-  .comme-img {
-    position: absolute;
-    top: -220px;
-    right: -120px;
-    width: 288px;
-    rotate: 30deg;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    user-select: none;
-  }
-
-  .content-inner .section-title {
-    color: #111;
-  }
-
-  .content-inner .accent {
-    color: var(--green);
-  }
-
-  .content-inner p {
-    color: #333;
-    font-size: 16px;
-    line-height: 1.8;
-    margin-top: 20px;
-  }
-
-  .presidente-border-wrap {
-    position: relative;
-    display: inline-block;
-    margin-top: 6px;
-  }
-
-  .presidente-border-svg {
-    position: absolute;
-    inset: -6px;
-    width: calc(100% + 12px);
-    height: calc(100% + 12px);
-    pointer-events: none;
-  }
-
-  .presidente-border-svg rect {
-    stroke-dasharray: 16 12;
-    animation: dash-march 0.6s linear infinite;
-  }
-
-  @keyframes dash-march {
-    to { stroke-dashoffset: -28; }
-  }
-
-  .reveal-cards {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
+  .nosotros-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    transition: grid-template-columns 0.5s ease;
   }
 
-  .drag-card {
-    position: absolute;
-    width: 38%;
-    background: rgba(255,255,255,0.95);
-    border: 2px solid #222;
-    border-radius: 6px;
-    padding: 20px 24px;
-    cursor: grab;
-    user-select: none;
-    touch-action: none;
-    pointer-events: auto;
-    will-change: transform, left, top;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  .grid-back-btn {
+    position: fixed;
+    top: 76px;
+    left: 16px;
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    backdrop-filter: blur(4px);
   }
 
-  .drag-card.is-square {
-    width: 18%;
-    aspect-ratio: 1;
+  .grid-back-btn:hover {
+    background: rgba(0,0,0,0.55);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .grid-back-btn.visible {
+    display: flex;
+  }
+
+  .nosotros-grid.grid1-expanded {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .nosotros-grid.chair-active {
+    grid-template-columns: 0.85fr 1fr 1fr;
+  }
+
+  .grid-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     display: flex;
     align-items: center;
     justify-content: center;
+    border-right: 1px solid rgba(0,0,0,0.15);
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    background: var(--grid-color);
   }
 
-  .drag-card:first-child {
-    width: 26%;
-    background: url('/backID.gif') center/cover;
+  .grid-item:nth-child(3),
+  .grid-item:nth-child(6) {
+    border-right: none;
   }
 
-  .hongo-gif {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    translate: 0 -50%;
-    height: 100%;
+  .grid-item:nth-child(4),
+  .grid-item:nth-child(5),
+  .grid-item:nth-child(6) {
+    border-bottom: none;
+  }
+
+  .grid-item.grid1-open {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    cursor: default;
+    z-index: 10;
+  }
+
+  .grid-item.list-open {
+    cursor: default;
+  }
+
+  .grid-front {
+    text-align: center;
+    padding: 20px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .grid-item.grid1-open .grid-front {
+    opacity: 0;
     pointer-events: none;
   }
 
-  .card-role {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #FF4500;
+  .grid-item.list-open .grid-front {
+    opacity: 0;
+  }
+
+  .grid-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    color: rgba(255,255,255,0.95);
+    line-height: 1.15;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .grid-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.15em;
+    margin: 6px 0 0;
     text-transform: uppercase;
+  }
+
+  .grid-item:not(.grid1-open):not(.list-open):hover {
+    filter: brightness(1.12);
+    scale: 1.02;
+    z-index: 5;
+  }
+
+  /* ── Grid 1 Expanded ── */
+  .grid-back {
+    position: absolute;
+    inset: 0;
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.1s;
+    overflow-y: auto;
+  }
+
+  .grid-item.grid1-open .grid-back {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .grid-back-content {
+    max-width: 680px;
+    margin: auto;
+    text-align: left;
+  }
+
+  .back-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0 0 20px;
+  }
+
+  .back-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.8rem, 1.4vw, 1rem);
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin: 0 0 14px;
+  }
+
+  .back-desc strong {
+    color: #fff;
+  }
+
+  .back-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 28px;
+  }
+
+  .back-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 5px 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+  }
+
+  .back-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .back-stat {
+    text-align: center;
+    padding: 16px 8px;
+    background: rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+  }
+
+  .back-stat-num {
+    display: block;
+    font-family: 'Orbitron', 'Space Mono', monospace;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
     margin-bottom: 4px;
   }
 
-  .drag-card.is-square .card-role {
-    margin-bottom: 0;
+  .back-stat-label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.5rem, 0.8vw, 0.6rem);
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
   }
 
-  .card-nick {
-    font-size: 32px;
-    font-weight: 900;
-    color: #F8F8FF;
-    letter-spacing: 6px;
-    -webkit-text-stroke: 1.5px #000;
-    paint-order: stroke fill;
-    text-shadow:
-      2px 0 0 #F8F8FF,
-      -2px 0 0 #F8F8FF,
-      0 2px 0 #F8F8FF,
-      0 -2px 0 #F8F8FF,
-      0 0 8px rgba(255,0,0,0.6),
-      0 0 16px rgba(255,0,0,0.4),
-      0 0 24px rgba(0,0,0,0.5);
-  }
-
-  .drag-card.card-frame {
-    width: 360px;
-    height: 360px;
-    padding: 0;
-    overflow: visible;
-    background: none;
-    border: none;
-    box-shadow: none;
-    cursor: grab;
-  }
-
-  .frame-wrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  .frame-bg {
-    position: absolute;
-    inset: 72px;
-    width: calc(100% - 144px);
-    height: calc(100% - 144px);
-    object-fit: cover;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    user-select: none;
-  }
-
-  .frame-fg {
+  /* ── Grid 2 List ── */
+  .grid-list {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    user-select: none;
-  }
-
-  .raver-gif,
-  .rei-gif,
-  .folder-git-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    user-select: none;
-  }
-
-  .drag-card.is-square[data-left="75"][data-top="56"] {
-    width: 12%;
-    padding: 0;
-    background: none;
-    border: none;
-  }
-
-  .drag-card.is-square[data-left="75"][data-top="30"] {
-    width: 32%;
-    padding: 0;
-    background: none;
-    border: none;
-    aspect-ratio: 4/3;
-    height: auto;
-  }
-
-  .drag-card.is-square[data-left="55"][data-top="8"] {
-    width: 12%;
-    padding: 0;
-    background: none;
-    border: none;
-  }
-
-  .github-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    align-items: center;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.1s;
   }
 
-  .github-modal.open {
+  .grid-item.list-open .grid-list {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .directive-entry {
+    font-family: 'VT323', 'Space Mono', monospace;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
     display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
   }
 
-  .github-modal.open .github-modal-window {
-    animation: win-open 0.3s cubic-bezier(.34,1.56,.64,1) forwards;
-  }
-
-  @keyframes win-open {
-    0% { scale: 0; opacity: 0; }
-    100% { scale: 1; opacity: 1; }
-  }
-
-  .github-modal-window {
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-    font-family: 'VT323', monospace;
-    min-width: 320px;
-    max-width: 90vw;
-  }
-
-  .win-titlebar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(90deg, #000080, #1084d0);
+  .directive-entry:hover {
+    background: rgba(0,0,0,0.15);
     color: #fff;
-    padding: 4px 4px 4px 8px;
-    font-size: 14px;
-    user-select: none;
   }
 
-  .win-close {
-    width: 24px;
-    height: 24px;
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
-    color: #000;
-    font-size: 12px;
+  .de-var {
+    color: #fff;
     font-weight: 700;
+  }
+
+  .de-op {
+    color: rgba(255,255,255,0.4);
+    margin: 0 4px;
+  }
+
+  .de-val {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .directive-entry:hover .de-val {
+    color: #fff;
+  }
+
+  /* ── Chair Overlay ── */
+  .chair-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 33.333%;
+    height: 100%;
+    z-index: 50;
+    background: #f5f0e8;
+    border-left: 2px solid #222;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+  }
+
+  .chair-overlay.open {
+    transform: translateX(0);
+  }
+
+  .chair-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 60;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #222;
+    background: rgba(255,255,255,0.9);
+    color: #222;
+    font-size: 1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    line-height: 1;
+    transition: background 0.2s;
   }
 
-  .win-close:active {
-    border-color: #808080 #fff #fff #808080;
+  .chair-close:hover {
+    background: #222;
+    color: #fff;
   }
 
-  .win-body {
-    padding: 8px;
-  }
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nosotros-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 1fr);
+    }
 
-  .win-body img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+    .grid-item:nth-child(3) {
+      border-right: none;
+    }
 
-.github-streak-card {
-  background: rgba(255,255,255,0.18) !important;
-  backdrop-filter: blur(2px);
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18), 0 0 1px white;
-}
+    .grid-item:nth-child(4) {
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .grid-item.grid1-open {
+      grid-column: 1 / 3;
+      grid-row: 1 / 4;
+    }
+
+    .grid-back {
+      padding: 24px 20px;
+    }
+
+    .back-stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chair-overlay {
+      width: 100%;
+    }
+
+    .grid-list {
+      padding: 20px;
+    }
+  }
 </style>
 
 <script>
-  function generateSeparator() {
-    const bar = document.getElementById('separator-bar');
-    if (!bar) return;
-    const char = '+\\\\+';
-    const containerWidth = bar.parentElement.clientWidth;
-    const charWidth = 40;
-    const repeatCount = Math.ceil(containerWidth / charWidth) + 2;
-    bar.textContent = new Array(repeatCount).fill(char).join('');
-  }
+  import { initDragCards, initPresidenteBorder, initModals } from '../nosotros/infrastructure/ui/scripts/dragCards.js';
 
-  function initDragCards() {
-    const cards = document.querySelectorAll('.drag-card');
-    const container = document.querySelector('.reveal-cards');
-    if (!cards.length || !container) return;
+  const grid = document.getElementById('nosotros-grid');
+  const items = grid.querySelectorAll('.grid-item');
+  const chairOverlay = document.getElementById('chair-overlay');
+  const chairClose = document.getElementById('chair-close');
 
-    let maxZ = 10;
+  // Grid 1 toggle
+  const grid1 = items[0];
+  const grid1Back = document.getElementById('grid1-back');
 
-    cards.forEach(card => {
-      const leftPct = parseFloat(card.dataset.left);
-      const topPct = parseFloat(card.dataset.top);
-      card.style.left = leftPct + '%';
-      card.style.top = topPct + '%';
-      card.style.zIndex = maxZ++;
-
-      let isDown = false, sx, sy, sl, st, lx, ly, lt;
-
-      const onDown = (e) => {
-        isDown = true;
-        maxZ++;
-        card.style.zIndex = maxZ;
-        card.style.scale = '1.05';
-        card.style.cursor = 'grabbing';
-        card.setPointerCapture(e.pointerId);
-
-        const cr = container.getBoundingClientRect();
-        const br = card.getBoundingClientRect();
-        sx = e.clientX; sy = e.clientY;
-        sl = br.left - cr.left; st = br.top - cr.top;
-        lx = e.clientX; ly = e.clientY; lt = performance.now();
-      };
-
-      const onMove = (e) => {
-        if (!isDown) return;
-        card.style.left = (sl + e.clientX - sx) + 'px';
-        card.style.top = (st + e.clientY - sy) + 'px';
-        lx = e.clientX; ly = e.clientY; lt = performance.now();
-      };
-
-      const onUp = (e) => {
-        if (!isDown) return;
-        isDown = false;
-        card.style.scale = '1';
-        card.style.cursor = 'grab';
-
-        const dt = performance.now() - lt;
-        if (dt > 0 && dt < 80) {
-          const vx = ((e.clientX - lx) / dt) * 16;
-          const vy = ((e.clientY - ly) / dt) * 16;
-          if (Math.sqrt(vx * vx + vy * vy) > 2) {
-            const cr = container.getBoundingClientRect();
-            const br = card.getBoundingClientRect();
-            card.style.transition = 'left 0.6s cubic-bezier(.22,1,.36,1), top 0.6s cubic-bezier(.22,1,.36,1)';
-            card.style.left = (br.left - cr.left + vx * 8) + 'px';
-            card.style.top = (br.top - cr.top + vy * 8) + 'px';
-            card.style.scale = '1';
-            setTimeout(() => { card.style.transition = 'none'; }, 700);
-          }
-        }
-      };
-
-      const onCancel = () => {
-        isDown = false;
-        card.style.scale = '1';
-        card.style.cursor = 'grab';
-      };
-
-      card.addEventListener('pointerdown', onDown);
-      card.addEventListener('pointermove', onMove);
-      card.addEventListener('pointerup', onUp);
-      card.addEventListener('pointercancel', onCancel);
-    });
-  }
-
-  function initReveal() {
-    const whiteEl = document.getElementById('reveal-white');
-    const redEl = document.getElementById('reveal-red');
-    const blueEl = document.getElementById('reveal-blue');
-    const greenEl = document.getElementById('reveal-green');
-    const purpleEl = document.getElementById('reveal-purple');
-    const section = document.getElementById('scroll-reveal');
-    if (!whiteEl || !redEl || !blueEl || !greenEl || !purpleEl || !section) return;
-
-    const STEPS = 7;
-    const stairWidth = 8;
-    const maxOffset = (STEPS - 1) * stairWidth;
-    const total = 100 + maxOffset;
-
-    const off1 = [];
-    for (let i = 0; i < STEPS; i++) off1.push(i * stairWidth);
-    for (let i = STEPS - 1; i >= 0; i--) off1.push(i * stairWidth);
-
-    const off2 = [];
-    for (let i = STEPS - 1; i >= 0; i--) off2.push(i * stairWidth);
-    for (let i = 0; i < STEPS; i++) off2.push(i * stairWidth);
-
-    const totalSteps = off1.length;
-    const stepH = 100 / totalSteps;
-
-    function poly1(p) {
-      const sp = p * p * (3 - 2 * p);
-      const pts = ['0% 0%'];
-      for (let i = 0; i < totalSteps; i++) {
-        const rx = Math.max(0, Math.min(100, sp * total - maxOffset + off1[i]));
-        pts.push(`${rx}% ${i * stepH}%`, `${rx}% ${(i + 1) * stepH}%`);
-      }
-      pts.push('0% 100%');
-      return `polygon(${pts.join(',')})`;
-    }
-
-    function polyStr(p, o) {
-      const sp = p * p * (3 - 2 * p);
-      const pts = ['0% 0%'];
-      for (let i = 0; i < totalSteps; i++) {
-        const rx = Math.max(0, Math.min(100, (1 - sp) * 100 - sp * maxOffset + o[i]));
-        pts.push(`${rx}% ${i * stepH}%`, `${rx}% ${(i + 1) * stepH}%`);
-      }
-      pts.push('0% 100%');
-      return `polygon(${pts.join(',')})`;
-    }
-
-    const sp = x => x * x * (3 - 2 * x);
-    let ticking = false;
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const rect = section.getBoundingClientRect();
-        const wh = window.innerHeight;
-        const totalScroll = rect.height + wh;
-        const scrolled = wh - rect.top;
-        const pt = Math.max(0, Math.min(1, scrolled / totalScroll));
-
-        const split = 0.19;
-        const p1 = Math.min(pt / split, 1);
-        const p2 = pt > split ? Math.min((pt - split) / split, 1) : 0;
-        const p3 = pt > split * 2 ? Math.min((pt - split * 2) / split, 1) : 0;
-        const p4 = pt > split * 3 ? Math.min((pt - split * 3) / split, 1) : 0;
-        const p5 = pt > split * 4 ? Math.min((pt - split * 4) / split, 1) : 0;
-
-        whiteEl.style.clipPath = p2 > 0 ? polyStr(p2, off2) : (pt > 0 ? poly1(p1) : poly1(0));
-
-        if (p2 > 0) {
-          redEl.style.opacity = sp(p2);
-        } else {
-          redEl.style.clipPath = 'none';
-        }
-
-        if (p3 > 0) {
-          redEl.style.clipPath = polyStr(p3, off2);
-          blueEl.style.opacity = sp(p3);
-        } else {
-          blueEl.style.clipPath = 'none';
-        }
-
-        if (p4 > 0) {
-          blueEl.style.clipPath = polyStr(p4, off2);
-          greenEl.style.opacity = sp(p4);
-        } else {
-          greenEl.style.clipPath = 'none';
-        }
-
-        if (p5 > 0) {
-          greenEl.style.clipPath = polyStr(p5, off2);
-          purpleEl.style.opacity = sp(p5);
-        }
-
-        ticking = false;
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  function initPresidenteBorder() {
-    const wrap = document.querySelector('.presidente-border-wrap');
-    if (!wrap) return;
-    const svg = wrap.querySelector('.presidente-border-svg');
-    const rect = svg.querySelector('rect');
-    const update = () => {
-      const w = wrap.offsetWidth;
-      const h = wrap.offsetHeight;
-      if (!w || !h) return;
-      svg.setAttribute('viewBox', `0 0 ${w + 12} ${h + 12}`);
-      rect.setAttribute('x', '2');
-      rect.setAttribute('y', '2');
-      rect.setAttribute('width', w + 8);
-      rect.setAttribute('height', h + 8);
-    };
-    update();
-    new ResizeObserver(update).observe(wrap);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    generateSeparator();
-    initReveal();
-    initDragCards();
-    initPresidenteBorder();
-
-    const folderGit = document.querySelector('.drag-card.is-square[data-left="55"][data-top="8"]');
-    const modal = document.getElementById('github-modal');
-    const closeBtn = document.getElementById('win-close');
-    if (folderGit && modal && closeBtn) {
-      folderGit.style.cursor = 'pointer';
-      folderGit.addEventListener('click', () => {
-        modal.classList.add('open');
-        modal.querySelector('.github-modal-window').style.animation = 'none';
-        void modal.querySelector('.github-modal-window').offsetHeight;
-        modal.querySelector('.github-modal-window').style.animation = '';
-      });
-      closeBtn.addEventListener('click', () => modal.classList.remove('open'));
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('open');
-      });
-    }
+  grid1.addEventListener('click', () => {
+    if (grid1.classList.contains('grid1-open')) return;
+    grid1.classList.add('grid1-open');
+    grid.classList.add('grid1-expanded');
+    grid1Back.classList.add('visible');
   });
 
-  window.addEventListener('resize', generateSeparator);
+  grid1Back.addEventListener('click', () => {
+    grid1.classList.remove('grid1-open');
+    grid.classList.remove('grid1-expanded');
+    grid1Back.classList.remove('visible');
+  });
+
+  // Grid 2 toggle list
+  const grid2 = items[1];
+
+  grid2.addEventListener('click', (e) => {
+    if (grid2.classList.contains('list-open') || e.target.closest('.directive-entry')) return;
+    grid2.classList.toggle('list-open');
+  });
+
+  // Chair entries
+  document.querySelectorAll('.directive-entry').forEach(entry => {
+    entry.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const member = entry.dataset.member;
+      if (member === 'chair') {
+        chairOverlay.classList.add('open');
+        setTimeout(() => {
+          initDragCards();
+          initPresidenteBorder();
+          initModals();
+        }, 100);
+      }
+    });
+  });
+
+  // Close chair
+  chairClose.addEventListener('click', () => {
+    chairOverlay.classList.remove('open');
+  });
 </script>

@@ -61,7 +61,7 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
     <div class="nav-inner">
 
       <a href={`${base}`} class="nav-logo" aria-label="ACM Student Chapter - Inicio">
-        <span class="logo-bracket">[</span>ACM<span class="logo-accent">_SC</span><span class="logo-bracket">]</span>
+        <span class="logo-bracket">[</span>UCSM<span class="logo-accent">_ACM</span><span class="logo-bracket">]</span>
       </a>
 
       <ul class="nav-links" id="navLinks" role="list">
@@ -82,6 +82,12 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
             href={`${base}eventos`}
             class:list={[{ active: currentPath === "/eventos" }]}
           >Eventos</a>
+        </li>
+        <li>
+          <a
+            href={`${base}proyectos`}
+            class:list={[{ active: currentPath === "/proyectos" }]}
+          >Proyectos</a>
         </li>
         <li>
           <a
@@ -123,7 +129,7 @@ const currentPath = path === "/" ? "/" : path.replace(/\/$/, "");
 
         <div class="footer-brand">
           <div class="footer-logo">
-            <span class="logo-bracket">[</span>ACM<span class="logo-accent">_SC</span><span class="logo-bracket">]</span>
+            <span class="logo-bracket">[</span>UCSM<span class="logo-accent">_ACM</span><span class="logo-bracket">]</span>
           </div>
           <p>ACM Student Chapter · Universidad Católica de Santa María<br/>Todos los derechos reservados © 2026</p>
         </div>

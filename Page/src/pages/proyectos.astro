@@ -1,0 +1,575 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../projects/infrastructure/ui/components/ProjectCard.astro';
+import ProjectCardMasonry from '../projects/infrastructure/ui/components/ProjectCardMasonry.astro';
+import { getProjects } from '../projects/application/projects';
+import '../projects/infrastructure/ui/styles/mural.css';
+
+const projects = getProjects();
+const allTags = [...new Set(projects.flatMap(p => p.tags))].sort();
+const allAreas = [...new Set(projects.map(p => p.area))].sort();
+---
+
+<BaseLayout title="Proyectos">
+
+  <section class="projects-mural" id="projects-mural">
+    <div class="projects-sticky">
+      <div class="mural-scroll" id="mural-scroll">
+        <div class="mural-wall" id="mural-wall">
+
+          <h2 class="mural-title" id="mural-title">PROYECTOS ACM</h2>
+
+          {projects.map(project => (
+            <ProjectCard project={project} />
+          ))}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects-listing" id="projects-listing">
+    <div class="listing-container">
+
+      <div class="listing-tools">
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input type="text" class="search-input" id="search-input" placeholder="Buscar proyectos..." />
+        </div>
+        <div class="toolbar-actions">
+          <div class="filter-wrapper">
+            <button class="filter-btn" id="filter-btn">
+              <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+              </svg>
+              Filtros
+            </button>
+            <div class="filter-panel" id="filter-panel" hidden>
+              <div class="filter-group">
+                <button class="filter-group-header" data-group="tecnologia">
+                  <span>Por tecnología</span>
+                  <svg class="group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+                <div class="filter-group-body collapsed" id="group-tecnologia">
+                  {allTags.map(tag => (
+                    <button class="filter-chip" data-group="tecnologia" data-value={tag}>{tag}</button>
+                  ))}
+                </div>
+              </div>
+              <div class="filter-group">
+                <button class="filter-group-header" data-group="area">
+                  <span>Por área</span>
+                  <svg class="group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+                <div class="filter-group-body collapsed" id="group-area">
+                  {allAreas.map(area => (
+                    <button class="filter-chip" data-group="area" data-value={area}>{area}</button>
+                  ))}
+                </div>
+              </div>
+              <div class="filter-group">
+                <button class="filter-group-header" data-group="fecha">
+                  <span>Por fecha de actualización</span>
+                  <svg class="group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+                <div class="filter-group-body collapsed" id="group-fecha">
+                  <button class="filter-chip" data-group="fecha" data-value="recent">Último mes</button>
+                  <button class="filter-chip" data-group="fecha" data-value="3months">Últimos 3 meses</button>
+                  <button class="filter-chip" data-group="fecha" data-value="year">Último año</button>
+                  <button class="filter-chip" data-group="fecha" data-value="older">Más antiguo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sort-select-wrapper">
+            <select class="sort-select" id="sort-select">
+              <option value="relevance">Por relevancia</option>
+              <option value="asc">Ascendente</option>
+              <option value="desc">Descendente</option>
+            </select>
+            <svg class="sort-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-info">
+        <span class="results-count" id="results-count">{projects.length} resultado{projects.length !== 1 ? 's' : ''}</span>
+      </div>
+
+      <div class="masonry-grid" id="masonry-grid">
+        {projects.map(project => (
+          <ProjectCardMasonry project={project} />
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .projects-listing {
+    position: relative;
+    z-index: 1;
+    padding: 80px 24px 100px;
+  }
+
+  .listing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .listing-tools {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .search-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    color: rgba(0, 230, 118, 0.4);
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    background: rgba(13, 20, 13, 0.7);
+    border: 1px solid rgba(0, 230, 118, 0.12);
+    border-radius: 8px;
+    color: #f6f4f3;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .search-input::placeholder {
+    color: rgba(246, 244, 243, 0.3);
+  }
+
+  .search-input:focus {
+    border-color: rgba(0, 230, 118, 0.4);
+  }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .filter-wrapper {
+    position: relative;
+  }
+
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    background: rgba(13, 20, 13, 0.7);
+    border: 1px solid rgba(0, 230, 118, 0.12);
+    border-radius: 8px;
+    color: rgba(246, 244, 243, 0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    color: #f6f4f3;
+  }
+
+  .filter-btn.active {
+    border-color: rgba(0, 230, 118, 0.4);
+    color: var(--green);
+  }
+
+  .filter-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sort-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .sort-select {
+    appearance: none;
+    padding: 12px 36px 12px 16px;
+    background: rgba(13, 20, 13, 0.7);
+    border: 1px solid rgba(0, 230, 118, 0.12);
+    border-radius: 8px;
+    color: rgba(246, 244, 243, 0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    min-width: 150px;
+  }
+
+  .sort-select:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    color: #f6f4f3;
+  }
+
+  .sort-select:focus {
+    border-color: rgba(0, 230, 118, 0.4);
+    color: #f6f4f3;
+  }
+
+  .sort-select option {
+    background: #0d140d;
+    color: #f6f4f3;
+  }
+
+  .sort-chevron {
+    position: absolute;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    color: rgba(0, 230, 118, 0.4);
+    pointer-events: none;
+  }
+
+  .filter-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+  }
+
+  .filter-backdrop.visible {
+    display: block;
+  }
+
+  .filter-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 100;
+    min-width: 320px;
+    padding: 16px 20px;
+    background: rgba(10, 16, 10, 0.97);
+    border: 1px solid rgba(0, 230, 118, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6);
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .filter-panel.open {
+    display: flex;
+  }
+
+  .filter-group {
+    border-bottom: 1px solid rgba(0, 230, 118, 0.06);
+    padding-bottom: 12px;
+  }
+
+  .filter-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .filter-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    color: rgba(246, 244, 243, 0.6);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .filter-group-header:hover {
+    color: rgba(246, 244, 243, 0.9);
+  }
+
+  .group-chevron {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .filter-group-header.open .group-chevron {
+    transform: rotate(180deg);
+  }
+
+  .filter-group-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  .filter-group-body.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .filter-chip {
+    padding: 4px 12px;
+    background: rgba(13, 20, 13, 0.6);
+    border: 1px solid rgba(0, 230, 118, 0.1);
+    border-radius: 20px;
+    color: rgba(246, 244, 243, 0.45);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .filter-chip:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    color: rgba(246, 244, 243, 0.8);
+  }
+
+  .filter-chip.active {
+    background: rgba(0, 230, 118, 0.1);
+    border-color: rgba(0, 230, 118, 0.35);
+    color: var(--green);
+  }
+
+  .results-info {
+    margin-bottom: 24px;
+  }
+
+  .results-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(246, 244, 243, 0.4);
+    letter-spacing: 0.03em;
+  }
+
+  .masonry-grid {
+    column-count: 4;
+    column-gap: 16px;
+  }
+
+  .masonry-grid > * {
+    break-inside: avoid;
+  }
+
+  @media (max-width: 1100px) {
+    .masonry-grid {
+      column-count: 3;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .projects-listing {
+      padding: 60px 16px 80px;
+    }
+
+    .listing-tools {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .search-wrapper {
+      width: 100%;
+    }
+
+    .toolbar-actions {
+      width: 100%;
+    }
+
+    .filter-btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .sort-select-wrapper {
+      flex: 1;
+    }
+
+    .sort-select {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .masonry-grid {
+      column-count: 2;
+      column-gap: 12px;
+    }
+
+    .filter-panel {
+      padding: 12px 14px;
+    }
+
+    .filter-chip {
+      font-size: 0.55rem;
+      padding: 3px 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .masonry-grid {
+      column-count: 1;
+    }
+
+    .toolbar-actions {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  import { initIntroAnimation } from '../projects/infrastructure/ui/scripts/introAnimation.js';
+  import { initMuralScroll } from '../projects/infrastructure/ui/scripts/muralScroll.js';
+
+  initIntroAnimation().then(() => {
+    initMuralScroll('projects-mural');
+  });
+</script>
+
+<script>
+  const searchInput = document.getElementById('search-input');
+  const filterBtn = document.getElementById('filter-btn');
+  const filterPanel = document.getElementById('filter-panel');
+  const sortSelect = document.getElementById('sort-select');
+  const resultsCount = document.getElementById('results-count');
+  const grid = document.getElementById('masonry-grid');
+  const cards = Array.from(grid.querySelectorAll('.masonry-card'));
+
+  let activeFilters = { tecnologia: [], area: [], fecha: [] };
+
+  filterBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    filterBtn.classList.toggle('active');
+    filterPanel.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!filterPanel.classList.contains('open')) return;
+    if (!e.target.closest('.filter-wrapper')) {
+      filterBtn.classList.remove('active');
+      filterPanel.classList.remove('open');
+    }
+  });
+
+  filterPanel.addEventListener('click', (e) => {
+    const header = e.target.closest('.filter-group-header');
+    if (header) {
+      header.classList.toggle('open');
+      const groupId = 'group-' + header.dataset.group;
+      document.getElementById(groupId).classList.toggle('collapsed');
+      return;
+    }
+
+    const chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    chip.classList.toggle('active');
+
+    const group = chip.dataset.group;
+    const value = chip.dataset.value;
+    const arr = activeFilters[group];
+    const idx = arr.indexOf(value);
+    if (idx === -1) {
+      arr.push(value);
+    } else {
+      arr.splice(idx, 1);
+    }
+
+    applyFilters();
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+  sortSelect.addEventListener('change', applyFilters);
+
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase().trim();
+    const selTech = activeFilters.tecnologia;
+    const selArea = activeFilters.area;
+    const selFecha = activeFilters.fecha;
+    const sortMode = sortSelect.value;
+
+    let filtered = cards.filter(card => {
+      const title = card.dataset.title;
+      const tags = card.dataset.tags.toLowerCase();
+      const area = card.dataset.area.toLowerCase();
+      const date = card.dataset.date;
+
+      const matchesSearch = !query || title.includes(query) || tags.includes(query);
+      const matchesTech = !selTech.length || selTech.some(t => tags.includes(t.toLowerCase()));
+      const matchesArea = !selArea.length || selArea.some(a => area.includes(a.toLowerCase()));
+      const matchesFecha = !selFecha.length || selFecha.some(f => matchDate(f, date));
+
+      return matchesSearch && matchesTech && matchesArea && matchesFecha;
+    });
+
+    if (sortMode === 'asc') {
+      filtered.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
+    } else if (sortMode === 'desc') {
+      filtered.sort((a, b) => b.dataset.title.localeCompare(a.dataset.title));
+    }
+
+    filtered.forEach(card => grid.appendChild(card));
+    cards.forEach(card => {
+      const show = filtered.includes(card);
+      card.style.display = show ? '' : 'none';
+    });
+
+    const visible = filtered.length;
+    resultsCount.textContent = `${visible} resultado${visible !== 1 ? 's' : ''}`;
+  }
+
+  function matchDate(filterValue, dateStr) {
+    if (!dateStr) return false;
+    const d = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now - d;
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
+    switch (filterValue) {
+      case 'recent': return diffDays <= 30;
+      case '3months': return diffDays <= 90;
+      case 'year': return diffDays <= 365;
+      case 'older': return diffDays > 365;
+      default: return true;
+    }
+  }
+</script>
