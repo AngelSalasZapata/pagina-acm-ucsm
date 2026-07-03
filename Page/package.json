@@ -15,7 +15,7 @@
     "astro": "^6.1.8",
     "motion": "^12.40.0",
     "postprocessing": "^6.39.1",
-    "surrealdb": "^2.0.3",
+    "surrealdb": "^2.0.4",
     "three": "^0.184.0"
   }
 }

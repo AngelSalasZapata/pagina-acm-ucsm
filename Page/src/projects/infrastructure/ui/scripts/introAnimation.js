@@ -51,12 +51,14 @@ export function initIntroAnimation() {
       return c;
     }
 
-    for (let i = 0; i < 10; i++) {
+    const maxClones = Math.min(10, cards.length);
+    for (let i = 0; i < maxClones; i++) {
       const c = cloneCard(cards[i]);
       minimalize(c);
       clones.push(c);
     }
-    for (let i = 0; i < 5; i++) {
+    const secondBatch = Math.min(5, cards.length);
+    for (let i = 0; i < secondBatch; i++) {
       const c = cloneCard(cards[i]);
       minimalize(c);
       clones.push(c);

@@ -5,17 +5,18 @@
 # ==============================================================================
 
 # ==========================================
-# COMPONENTE 1: BASE DE DATOS (Fija: 1 Réplica)
+# COMPONENTE 1: BASE DE DATOS SURREALDB (Persistente con SurrealKV)
 # ==========================================
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet   # Usamos StatefulSet porque SurrealKV maneja data local persistente y requiere identidad fija
 metadata:
-  name: ucsm-acm-db-deploy
+  name: ucsm-acm-db-set
   namespace: "2023241041"
   labels:
     app.kubernetes.io/part-of: ucsm-acm
 spec:
-  replicas: 1 # Las bases de datos transaccionales NO deben autoescalarse horizontalmente con HPA clásico
+  serviceName: "db-service"
+  replicas: 1       # Fijo en 1 porque las DBs embebidas en disco local no se autoescalan horizontalmente
   selector:
     matchLabels:
       component: db
@@ -25,24 +26,24 @@ spec:
         component: db
     spec:
       containers:
-      - name: postgres-db
-        image: postgres:17-alpine
-        env:
-        - name: POSTGRES_DB
-          value: ucsm_acm
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: ucsm-acm-secret-env
-              key: postgres-user
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: ucsm-acm-secret-env
-              key: postgres-password
+      - name: surrealdb
+        image: surrealdb/surrealdb:v2.0.4 # Usamos la v2 para asegurar soporte nativo de surrealkv
+        # Comando para inicializar SurrealKV en la ruta del volumen montado con tus credenciales root
+        args:
+        - "start"
+        - "surrealkv:///surreal_data/acm_kv"
+        - "--username"
+        - "root"
+        - "--password"
+        - "root"
+        - "--bind"
+        - "0.0.0.0:8000"
         ports:
-        - containerPort: 5432
+        - containerPort: 8000
           name: dbport
+        volumeMounts:
+        - name: surreal-storage
+          mountPath: /surreal_data  # Apunta a la carpeta donde SurrealKV escribirá en el disco permanente
         resources:
           requests:
             cpu: "100m"
@@ -50,6 +51,15 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
+  # Define la solicitud del disco persistente de forma automática para el Pod
+  volumeClaimTemplates:
+  - metadata:
+      name: surreal-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ] # El volumen solo lo monta este Pod de base de datos
+      resources:
+        requests:
+          storage: 2Gi # Espacio suficiente para la data de la ACM
 ---
 apiVersion: v1
 kind: Service
@@ -58,12 +68,11 @@ metadata:
   namespace: "2023241041"
 spec:
   selector:
-    component: db # Vincula este servicio directamente al contenedor de PostgreSQL
+    component: db
   ports:
   - protocol: TCP
-    port: 5432
-    targetPort: 5432
-
+    port: 8000        # Cambiado a 8000 porque SurrealDB expone su API/RPC en este puerto
+    targetPort: 8000
 ---
 # ==========================================
 # COMPONENTE 2: BACKEND FASTAPI (Autoescalable)

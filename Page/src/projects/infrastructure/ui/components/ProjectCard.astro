@@ -8,32 +8,38 @@ export interface Props {
 const { project } = Astro.props;
 ---
 
-<div class="project-card">
-  <div class="card-img">
-    <img src={project.image} alt={project.title} loading="lazy" />
-  </div>
-  <div class="card-body">
-    <h3>{project.title}</h3>
-    <p>{project.description}</p>
-    <div class="card-tags">
-      {project.tags.map(tag => <span>{tag}</span>)}
+<div class="project-card" data-flipped="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <div class="card-img">
+        <img src={project.image} alt={project.title} loading="lazy" />
+      </div>
+      <div class="card-body">
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+        <div class="card-tags">
+          {project.tags.map(tag => <span>{tag}</span>)}
+        </div>
+        <a href={project.link} target="_blank" class="card-link">{project.linkText}</a>
+      </div>
     </div>
-    <a href={project.link} target="_blank" class="card-link">{project.linkText}</a>
+    <div class="card-back">
+      <h3>{project.title}</h3>
+      <p>{project.description}</p>
+      <div class="card-back-info">
+        <span>Tecnologías: {project.tags.join(', ')}</span>
+        <span>Área: {project.area}</span>
+        <span>Actualizado: {project.updatedAt}</span>
+      </div>
+      <a href={project.link} target="_blank" class="card-link">{project.linkText}</a>
+    </div>
   </div>
 </div>
 
 <style>
   .project-card {
-    display: flex;
-    flex-direction: column;
-    background: rgba(13, 20, 13, 0.95);
-    border: 1px solid var(--border);
+    perspective: 1000px;
     border-radius: 6px;
-    overflow: hidden;
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.4),
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.03);
     cursor: default;
     opacity: 0.75;
     transition: opacity 0.2s;
@@ -43,11 +49,49 @@ const { project } = Astro.props;
   .project-card:hover {
     scale: 1.05;
     opacity: 1;
-    box-shadow:
-      0 4px 16px rgba(0, 230, 118, 0.15),
-      0 12px 48px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
     z-index: 100 !important;
+  }
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(13, 20, 13, 0.95);
+    border: 1px solid var(--border);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .project-card.flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-front, .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .card-front {
+    display: flex;
+    flex-direction: column;
   }
 
   .card-img {
@@ -55,6 +99,7 @@ const { project } = Astro.props;
     flex: 1;
     overflow: hidden;
     min-height: 0;
+    cursor: pointer;
   }
 
   .card-img img {
@@ -62,6 +107,7 @@ const { project } = Astro.props;
     height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: none;
   }
 
   .card-body {
@@ -71,7 +117,7 @@ const { project } = Astro.props;
     gap: 6px;
   }
 
-  .card-body h3 {
+  .card-body h3, .card-back h3 {
     font-family: 'Syne', sans-serif;
     font-size: 1rem;
     color: #f6f4f3;
@@ -89,6 +135,23 @@ const { project } = Astro.props;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .card-back p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(246, 244, 243, 0.65);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .card-back-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(246, 244, 243, 0.5);
   }
 
   .card-tags {
@@ -131,7 +194,7 @@ const { project } = Astro.props;
       padding: 8px 10px 10px;
     }
 
-    .card-body h3 {
+    .card-body h3, .card-back h3 {
       font-size: 0.85rem;
     }
 
@@ -143,5 +206,15 @@ const { project } = Astro.props;
     .card-tags span {
       font-size: 0.55rem;
     }
+
+    .card-back {
+      padding: 10px;
+    }
+
+    .card-back p {
+      font-size: 0.65rem;
+    }
   }
 </style>
+
+
