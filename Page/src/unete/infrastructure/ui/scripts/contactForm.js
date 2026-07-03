@@ -2,19 +2,30 @@ function handleFormSubmit(e) {
   e.preventDefault();
   const btn     = e.target.querySelector('button[type="submit"]');
   const success = document.getElementById('formSuccess');
+  const form    = e.target;
 
   btn.textContent = 'Enviando...';
   btn.disabled    = true;
   btn.style.opacity = '0.7';
 
-  setTimeout(() => {
-    e.target.reset();
-    btn.textContent   = 'Enviar solicitud →';
-    btn.disabled      = false;
-    btn.style.opacity = '';
-    success.classList.add('visible');
-    setTimeout(() => success.classList.remove('visible'), 5000);
-  }, 1400);
+  const name    = encodeURIComponent(form.name.value.trim());
+  const email   = encodeURIComponent(form.email.value.trim());
+  const message = encodeURIComponent(form.message.value.trim());
+  const subject = encodeURIComponent(`Nuevo miembro: ${form.name.value.trim()}`);
+  const body    = encodeURIComponent(
+    `Nombre: ${form.name.value.trim()}\n` +
+    `Correo: ${form.email.value.trim()}\n\n` +
+    `${form.message.value.trim()}`
+  );
+
+  window.open(`mailto:acm@ucsm.edu.pe?subject=${subject}&body=${body}`, '_blank');
+
+  form.reset();
+  btn.textContent   = 'Enviar solicitud →';
+  btn.disabled      = false;
+  btn.style.opacity = '';
+  success.classList.add('visible');
+  setTimeout(() => success.classList.remove('visible'), 5000);
 }
 
 const contactForm = document.getElementById('contactForm');

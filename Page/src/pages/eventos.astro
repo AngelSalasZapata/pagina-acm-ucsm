@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getEvents } from '../eventos/application/events';
 import '../eventos/infrastructure/ui/styles/events.css';
-const events = getEvents();
+const events = await getEvents();
 ---
 <BaseLayout title="Eventos">
   <section class="events section" id="events">
@@ -28,12 +28,14 @@ const events = getEvents();
                 <span>⏱ {event.duration}</span>
                 <span>👥 {event.capacity}</span>
               </div>
-              <a href="#contact" class="event-btn">{event.buttonText}</a>
+               <a href={event.link || '#'} target="_blank" rel="noopener" class="event-btn">{event.buttonText}</a>
             </div>
           </div>
         ))}
       </div>
     </div>
   </section>
-  <script>import('../eventos/infrastructure/ui/scripts/events.js');</script>
+  <script>
+    import '../eventos/infrastructure/ui/scripts/events.js';
+  </script>
 </BaseLayout>

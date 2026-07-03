@@ -517,11 +517,11 @@ const base = import.meta.env.BASE_URL;
   import { initDragCards, initPresidenteBorder, initModals } from '../nosotros/infrastructure/ui/scripts/dragCards.js';
 
   const grid = document.getElementById('nosotros-grid');
+  if (!grid) throw new Error('nosotros-grid not found');
   const items = grid.querySelectorAll('.grid-item');
   const chairOverlay = document.getElementById('chair-overlay');
   const chairClose = document.getElementById('chair-close');
 
-  // Grid 1 toggle
   const grid1 = items[0];
   const grid1Back = document.getElementById('grid1-back');
 
@@ -529,30 +529,29 @@ const base = import.meta.env.BASE_URL;
     if (grid1.classList.contains('grid1-open')) return;
     grid1.classList.add('grid1-open');
     grid.classList.add('grid1-expanded');
-    grid1Back.classList.add('visible');
+    grid1Back?.classList.add('visible');
   });
 
-  grid1Back.addEventListener('click', () => {
+  grid1Back?.addEventListener('click', () => {
     grid1.classList.remove('grid1-open');
     grid.classList.remove('grid1-expanded');
-    grid1Back.classList.remove('visible');
+    grid1Back?.classList.remove('visible');
   });
 
-  // Grid 2 toggle list
   const grid2 = items[1];
 
-  grid2.addEventListener('click', (e) => {
-    if (grid2.classList.contains('list-open') || e.target.closest('.directive-entry')) return;
+  grid2.addEventListener('click', (e: Event) => {
+    const target = e.target as HTMLElement | null;
+    if (grid2.classList.contains('list-open') || target?.closest('.directive-entry')) return;
     grid2.classList.toggle('list-open');
   });
 
-  // Chair entries
   document.querySelectorAll('.directive-entry').forEach(entry => {
-    entry.addEventListener('click', (e) => {
+    entry.addEventListener('click', (e: Event) => {
       e.stopPropagation();
-      const member = entry.dataset.member;
+      const member = (entry as HTMLElement).dataset.member;
       if (member === 'chair') {
-        chairOverlay.classList.add('open');
+        chairOverlay?.classList.add('open');
         setTimeout(() => {
           initDragCards();
           initPresidenteBorder();
@@ -562,8 +561,7 @@ const base = import.meta.env.BASE_URL;
     });
   });
 
-  // Close chair
-  chairClose.addEventListener('click', () => {
-    chairOverlay.classList.remove('open');
+  chairClose?.addEventListener('click', () => {
+    chairOverlay?.classList.remove('open');
   });
 </script>

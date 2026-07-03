@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getGalleryItems } from '../galeria/application/gallery';
 import '../galeria/infrastructure/ui/styles/gallery.css';
-const items = getGalleryItems();
+const items = await getGalleryItems();
 ---
 <BaseLayout title="Galería">
   <section class="gallery section" id="gallery">
@@ -26,5 +26,7 @@ const items = getGalleryItems();
       </div>
     </div>
   </section>
-  <script>import('../galeria/infrastructure/ui/scripts/gallery.js');</script>
+  <script>
+    import '../galeria/infrastructure/ui/scripts/gallery.js';
+  </script>
 </BaseLayout>

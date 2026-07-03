@@ -9,5 +9,6 @@ export interface Event {
   location: string;
   duration: string;
   capacity: string;
+  link: string;
   buttonText: string;
 }
